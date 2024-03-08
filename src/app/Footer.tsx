@@ -1,32 +1,22 @@
 export function Footer() {
   return (
-    <footer className="bg-navbar text-navbar-foreground flex flex-col justify-between gap-8 px-5 py-6 md:flex-row sm:px-10 md:px-20">
+    <footer className="bg-navbar text-navbar-foreground flex flex-col justify-between gap-4 px-5 py-6 md:flex-row md:gap-8 sm:px-10 md:px-20">
       <div className="flex-1 flex flex-col gap-4">
-        <h2 className="text-xl">Contacts</h2>
+        <h2 className="text-xl">Contact Information</h2>
         <div className="flex flex-col gap-2 text-navbar-muted-foreground">
           <div>
-            <h3 className="font-semibold">
+            <h3 className="font-bold">
               Rob Gashgarian - President & Treasurer
             </h3>
             <p>Email: brantchessca@gmail.com</p>
             <p>Phone: (519) 732-8909</p>
           </div>
           <div>
-            <h3 className="font-semibold">
+            <h3 className="font-bold">
               Lee Hendon - Tournament & Website Director
             </h3>
             <p>Email: brantchessca@gmail.com</p>
             <p>Phone: (519) 771-8848</p>
-          </div>
-          <div>
-            <h3 className="font-semibold">Location</h3>
-            <a
-              href="https://www.google.com/maps/@43.1418356,-80.2687033,19z?entry=ttu"
-              target="_blank"
-              className="hover:underline"
-            >
-              10 Albion St. Brantford, Grace Anglican Church, Lower Level
-            </a>
           </div>
         </div>
       </div>
@@ -39,7 +29,7 @@ export function Footer() {
             buy a membership.
           </p>
           <div>
-            <h3 className="font-semibold">Membership Fees</h3>
+            <h3 className="font-bold">Membership Fees</h3>
             <p>Adults: $40</p>
             <p>Students, Juniors, & Seniors: $30</p>
             <p>Family: $60</p>

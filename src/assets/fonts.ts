@@ -2,7 +2,7 @@ import { Roboto, Roboto_Mono } from "next/font/google"
 
 export const roboto = Roboto({
   subsets: ["latin"],
-  weight: ["300", "500", "900"],
+  weight: ["500", "900"],
 })
 
-export const robotoMono = Roboto_Mono({ subsets: ["latin"], weight: ["400"] })
+export const robotoMono = Roboto_Mono({ subsets: ["latin"], weight: ["500"] })

@@ -20,6 +20,12 @@ import PN from "@/assets/img/PN.jpg"
 import RG from "@/assets/img/RG.jpg"
 import LH from "@/assets/img/LH.jpg"
 import { robotoMono } from "@/assets/fonts"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Champions",
+  description: "See all the Brantford Chess Champions since 1954.",
+}
 
 type Champion = {
   firstInitial: string
@@ -183,7 +189,7 @@ export default function ChampionsPage() {
         </TableBody>
       </Table>
       <div className="flex flex-col items-center gap-2">
-        <h2 className="text-xl font-semibold text-center">
+        <h2 className="text-xl font-bold text-center">
           {" "}
           2018 Trophy Presentations
         </h2>

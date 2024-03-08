@@ -12,7 +12,7 @@ import {
   DropdownMenuPortal,
   DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu"
-import logoDark from "@/assets/img/brantchess-logo-dark.png"
+import brantchessLogo from "@/assets/img/brantchess-logo.png"
 import Link from "next/link"
 import { Menu, Moon, Sun } from "lucide-react"
 import { useEffect, useState } from "react"
@@ -38,7 +38,7 @@ export function Navbar() {
     <nav className="flex items-center justify-between px-5 py-6 bg-navbar text-navbar-foreground sm:px-10 md:px-20">
       <Link href="/">
         <Image
-          src={logoDark}
+          src={brantchessLogo}
           alt="Brantford Chess Club Logo"
           width="100"
         ></Image>

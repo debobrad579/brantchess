@@ -9,7 +9,7 @@ export function Tournament({
 }) {
   return (
     <div>
-      <h2 className="font-semibold text-xl mb-2">{title}</h2>
+      <h2 className="font-bold text-xl mb-2">{title}</h2>
       {children}
     </div>
   )

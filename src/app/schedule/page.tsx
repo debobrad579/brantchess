@@ -1,10 +1,16 @@
+import type { Metadata } from "next"
 import { Tournament } from "./Tournament"
+
+export const metadata: Metadata = {
+  title: "Schedule & Games",
+  description: "See the current tournament schedule.",
+}
 
 export default function SchedulePage() {
   return (
     <>
-      <h1 className="text-2xl font-semibold">2024 TOURNAMENT SCHEDULE</h1>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <h1 className="text-2xl font-bold">2024 TOURNAMENT SCHEDULE</h1>
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <Tournament title="2024 Leo McMahon Memorial">
           <p>
             2024 Championship Qualifiers (Top 8 play for the A championship, all

@@ -1,9 +1,19 @@
 export default function Home() {
   return (
     <>
-      <h1 className="text-2xl font-semibold">
+      <h1 className="text-2xl font-bold">
         WELCOME TO THE BRANTFORD CHESS CLUB CELEBRATING OVER 100 YEARS OF CHESS!
       </h1>
+      <h2 className="text-xl font-bold">
+        We Are Located At{" "}
+        <a
+          href="https://www.google.com/maps/@43.1418356,-80.2687033,19z?entry=ttu"
+          target="_blank"
+          className="text-blue-500 hover:underline"
+        >
+          10 Albion St. Brantford, Grace Anglican Church, Lower Level
+        </a>
+      </h2>
       <p>
         The Brantford Chess Club is dedicated to the play and promotion of chess
         in the Brantford area. Our club meets each Wednesday night at 6:00 pm,
@@ -21,7 +31,7 @@ export default function Home() {
         organizes the SWOCL Grand Prix with events throughout Southwestern
         Ontario. We held our annual meeting and elected our executive. Our
         president and treasurer is Rob Gashgarian and the tournament and website
-        director will be Lee Hendon.
+        director is Lee Hendon.
       </p>
     </>
   )

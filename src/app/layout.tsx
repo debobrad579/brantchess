@@ -7,8 +7,12 @@ import { roboto } from "@/assets/fonts"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Brantford Chess Club",
-  description: "New website concept for the Brantford Chess Club.",
+  title: {
+    default: "Brantford Chess Club",
+    template: `%s | Brantford Chess Club`,
+  },
+  description:
+    "The Brantford Chess Club is dedicated to the play and promotion of chess in the Brantford area.",
 }
 
 export default function RootLayout({

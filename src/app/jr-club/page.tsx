@@ -1,26 +1,35 @@
-import Image from "next/image"
-import chessKid from "@/assets/chesskid.jpg"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Jr. Club",
+  description:
+    "Here's some free resources to learn and improve at the game of chess.",
+}
 
 export default function JrClubPage() {
   return (
     <>
-      <h1 className="text-2xl font-bold">
-        LIBRARY CHESS CLUB (ADULTS NOW WELCOME)
-      </h1>
-      <a
-        href="https://calendar.brantfordlibrary.ca/default/Detail/2024-01-06-1000-Chess-Club"
-        className="underline"
-      >
-        Library Program Schedule
-      </a>
+      <h1 className="text-2xl font-bold">JUNIOR CHESS CLUB</h1>
+      <h2 className="text-xl font-bold">
+        Library Chess Club (Adults Now Welcome)
+      </h2>
       <p>
         Have you ever wanted to learn chess? Here's an opportunity for kids ages
         6 and up to learn the game, or to practice the skills that you already
         have. A member of the Brantford Chess Club will offer basic instruction
         and tips on how to improve your game.
       </p>
+      <div>
+        <a
+          href="https://calendar.brantfordlibrary.ca/default/Detail/2024-01-06-1000-Chess-Club"
+          className="text-blue-500 hover:underline"
+        >
+          Library Program Schedule
+        </a>
+      </div>
+      <h2 className="text-xl font-bold">Want to improve your game?</h2>
       <p>
-        Here is some free software and databases with training questions to help
+        Here's some free software and databases with training questions to help
         you improve your game! First download and install the Fritz 5.32 file
         and then download and unzip the file Fritz532/mate1.zip file to solve
         some Checkmate in 1 positions. The third link is a video for anyone new
@@ -52,7 +61,7 @@ export default function JrClubPage() {
           </a>
         </li>
       </ul>
-      <h2 className="text-xl font-semibold">Junior Friendly Links:</h2>
+      <h2 className="text-xl font-bold">Junior Friendly Links:</h2>
       <ul className="ml-8">
         <li className="list-disc">
           <a
