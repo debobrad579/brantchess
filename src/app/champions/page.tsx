@@ -176,11 +176,7 @@ export default function ChampionsPage() {
                 {champion.firstInitial}
               </TableCell>
               <TableCell>{champion.lastName}</TableCell>
-              <TableCell>
-                {champion.years
-                  .map((year) => year.toString().slice(-2))
-                  .join(", ")}
-              </TableCell>
+              <TableCell>{formatYears(champion.years)}</TableCell>
               <TableCell className="text-right">
                 {champion.years.length}
               </TableCell>
@@ -190,7 +186,6 @@ export default function ChampionsPage() {
       </Table>
       <div className="flex flex-col items-center gap-2">
         <h2 className="text-xl font-bold text-center">
-          {" "}
           2018 Trophy Presentations
         </h2>
         <Carousel className="w-3/4 max-w-sm ring-1 ring-ring">
@@ -214,4 +209,30 @@ export default function ChampionsPage() {
       </div>
     </>
   )
+}
+
+function formatYears(years: number[]) {
+  let formattedYears = ""
+
+  years.sort((a, b) => a - b)
+
+  for (let i = 0; i < years.length; i++) {
+    if (i === 0) {
+      formattedYears += years[i].toString().slice(-2)
+      continue
+    }
+
+    if (
+      i === years.length - 1 ||
+      years[i] + 1 !== years[i + 1] ||
+      years[i] - 1 !== years[i - 1]
+    ) {
+      formattedYears += `, ${years[i].toString().slice(-2)}`
+      continue
+    }
+
+    formattedYears += "-"
+  }
+
+  return formattedYears.replace(/(?<=\d)-{1,}(,\s?)(?=,|\s|$)/g, " -")
 }
