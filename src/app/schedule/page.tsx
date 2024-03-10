@@ -1,3 +1,4 @@
+import { format } from "date-fns"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -5,11 +6,14 @@ export const metadata: Metadata = {
   description: "See the current tournament schedule.",
 }
 
-type Tournament = {
+export type Tournament = {
   title: string
-  specificInfo: string
+  subtitle: string
   defendingChampion: string
-  date: string
+  date: {
+    from: Date
+    to?: Date
+  }
   format: string
   timeControl: {
     startingTime: number
@@ -17,13 +21,16 @@ type Tournament = {
   }
 }
 
-const tournaments: Tournament[] = [
+export const tournaments: Tournament[] = [
   {
     title: "2024 Leo McMahon Memorial",
-    specificInfo:
+    subtitle:
       "2024 Championship Qualifiers (Top 8 play for the A championship, all others play for the Reserve championship)",
     defendingChampion: "Robin Johnston",
-    date: "March 13 - April 10, 2024",
+    date: {
+      from: new Date("2024-03-13"),
+      to: new Date("2024-04-10"),
+    },
     format: "5 round Swiss",
     timeControl: {
       startingTime: 45,
@@ -32,9 +39,12 @@ const tournaments: Tournament[] = [
   },
   {
     title: "2024 Junior Championship",
-    specificInfo: "Top two finishers from Kari Nurmi qualifier above.",
+    subtitle: "Top two finishers from Kari Nurmi qualifier above.",
     defendingChampion: "Matéo Marut",
-    date: "Starts April 10 - 17, 2024",
+    date: {
+      from: new Date("2024-04-10"),
+      to: new Date("2024-04-17"),
+    },
     format: "4 game match",
     timeControl: {
       startingTime: 15,
@@ -43,9 +53,11 @@ const tournaments: Tournament[] = [
   },
   {
     title: "2024 Reserve Championship",
-    specificInfo: "",
+    subtitle: "",
     defendingChampion: "Josh Clarizio",
-    date: "Starts May 1, 2024",
+    date: {
+      from: new Date("2024-05-01"),
+    },
     format: "7 Round Swiss",
     timeControl: {
       startingTime: 45,
@@ -53,10 +65,12 @@ const tournaments: Tournament[] = [
     },
   },
   {
-    title: "2024 Leo McMahon Memorial",
-    specificInfo: "",
+    title: "2024 Tanz - Napierala Championship Cup",
+    subtitle: "",
     defendingChampion: "John Vlasov",
-    date: "Starts May 1, 2024",
+    date: {
+      from: new Date("2024-05-01"),
+    },
     format: "8 player Round Robin",
     timeControl: {
       startingTime: 60,
@@ -73,9 +87,16 @@ export default function SchedulePage() {
         {tournaments.map((tournament) => (
           <div key={tournament.title}>
             <h2 className="font-bold text-xl mb-2">{tournament.title}</h2>
-            <p>{tournament.specificInfo}</p>
+            <p>{tournament.subtitle}</p>
             <p>{`Defending Champion: ${tournament.defendingChampion}`}</p>
-            <p>{tournament.date}</p>
+            <p>
+              {tournament.date.to == null
+                ? `Starts ${format(tournament.date.from, "MMMM Lo, yyyy")}`
+                : `${format(tournament.date.from, "MMMM Lo")} - ${format(
+                    tournament.date.to,
+                    "MMMM Lo, yyyy"
+                  )}`}
+            </p>
             <p>{`Format ${tournament.format}`}</p>
             <p>{`${tournament.timeControl.startingTime} min + ${tournament.timeControl.increment} sec`}</p>
           </div>

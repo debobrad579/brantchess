@@ -15,27 +15,16 @@ import {
 import brantchessLogo from "@/assets/img/brantchess-logo.png"
 import Link from "next/link"
 import { Menu, Moon, Sun } from "lucide-react"
-import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
 import { usePathname } from "next/navigation"
+import { useMediaQuery } from "@/hooks/useMediaQuery"
 
 export function Navbar() {
-  const [isDesktop, setIsDesktop] = useState(false)
+  const isDesktop = useMediaQuery("(min-width: 1100px)")
   const pathname = usePathname()
 
-  useEffect(() => {
-    function handleResize() {
-      setIsDesktop(window.innerWidth >= 1100)
-    }
-
-    handleResize()
-    window.addEventListener("resize", handleResize)
-
-    return () => window.removeEventListener("resize", handleResize)
-  }, [])
-
   return (
-    <nav className="flex items-center justify-between px-5 py-6 bg-navbar text-navbar-foreground sm:px-10 md:px-20">
+    <nav className="w-screen flex items-center justify-between px-5 py-6 bg-navbar text-navbar-foreground sm:px-10 md:px-20">
       <Link href="/">
         <Image
           src={brantchessLogo}
