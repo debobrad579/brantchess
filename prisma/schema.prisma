@@ -9,8 +9,13 @@ datasource db {
 }
 
 model Tournament {
-  id       Int    @id @default(autoincrement())
-  title    String
-  subtitle String
-  format   String
+  id                Int       @id @default(autoincrement())
+  title             String
+  subtitle          String?
+  defendingChampion String
+  startDate         DateTime
+  endDate           DateTime?
+  format            String
+  startingTime      Int
+  increment         Int
 }

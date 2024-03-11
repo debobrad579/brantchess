@@ -1,7 +1,6 @@
 "use client"
 
-import { useState } from "react"
-import type { Tournament } from "../schedule/page"
+import { FormEvent, useState } from "react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
@@ -19,81 +18,23 @@ import {
 import { useMediaQuery } from "@/hooks/useMediaQuery"
 import { Separator } from "@/components/ui/separator"
 import { FormDateRangePicker } from "@/components/forms/FormDateRangePicker"
+import { addTournamentAction } from "./actions"
+import { Tournament } from "@prisma/client"
 
 const formSchema = z.object({
   title: z.string(),
-  subtitle: z.string(),
+  subtitle: z.string().optional(),
   defendingChampion: z.string(),
   date: z.object({
     from: z.date(),
-    to: z.date(),
+    to: z.date().optional(),
   }),
   format: z.string(),
-  timeControl: z.object({
-    startingTime: z.number(),
-    increment: z.number(),
-  }),
+  startingTime: z.coerce.number().int(),
+  increment: z.coerce.number().int(),
 })
 
-export const tournaments: Tournament[] = [
-  {
-    title: "2024 Leo McMahon Memorial",
-    subtitle:
-      "2024 Championship Qualifiers (Top 8 play for the A championship, all others play for the Reserve championship)",
-    defendingChampion: "Robin Johnston",
-    date: {
-      from: new Date("2024-03-13"),
-      to: new Date("2024-04-10"),
-    },
-    format: "5 round Swiss",
-    timeControl: {
-      startingTime: 45,
-      increment: 15,
-    },
-  },
-  {
-    title: "2024 Junior Championship",
-    subtitle: "Top two finishers from Kari Nurmi qualifier above.",
-    defendingChampion: "Matéo Marut",
-    date: {
-      from: new Date("2024-04-10"),
-      to: new Date("2024-04-17"),
-    },
-    format: "4 game match",
-    timeControl: {
-      startingTime: 15,
-      increment: 10,
-    },
-  },
-  {
-    title: "2024 Reserve Championship",
-    subtitle: "",
-    defendingChampion: "Josh Clarizio",
-    date: {
-      from: new Date("2024-05-01"),
-    },
-    format: "7 Round Swiss",
-    timeControl: {
-      startingTime: 45,
-      increment: 15,
-    },
-  },
-  {
-    title: "2024 Tanz - Napierala Championship Cup",
-    subtitle: "",
-    defendingChampion: "John Vlasov",
-    date: {
-      from: new Date("2024-05-01"),
-    },
-    format: "8 player Round Robin",
-    timeControl: {
-      startingTime: 60,
-      increment: 30,
-    },
-  },
-]
-
-export function TournamentCard() {
+export function TournamentCard({ tournaments }: { tournaments: Tournament[] }) {
   const [isOpen, setIsOpen] = useState(false)
   const [tournament, setTournament] = useState<Tournament>()
 
@@ -108,13 +49,13 @@ export function TournamentCard() {
         />
       ) : (
         <ScrollArea className="overflow-auto">
-          <CardContent className="p-3 h-[368px]">
+          <CardContent className="p-3 h-[416px]">
             <div className="flex flex-col gap-2">
               {tournaments.map((tournament) => (
                 <Button
                   className="whitespace-normal"
                   size="variable"
-                  key={tournament.title}
+                  key={tournament.id}
                   variant="outline"
                   type="button"
                   onClick={() => {
@@ -154,54 +95,77 @@ function TournamentForm({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: tournament?.title,
-      subtitle: tournament?.subtitle,
-      defendingChampion: tournament?.defendingChampion,
-      date: tournament?.date,
-      format: tournament?.format,
-      timeControl: tournament?.timeControl,
+      title: tournament?.title ?? "",
+      subtitle: tournament?.subtitle ?? "",
+      defendingChampion: tournament?.defendingChampion ?? "",
+      date: {
+        from: tournament?.startDate,
+        to: tournament?.endDate || undefined,
+      },
+      format: tournament?.format ?? "",
+      startingTime: tournament?.startingTime ?? 15,
+      increment: tournament?.increment ?? 10,
     },
   })
-  const isLarge = useMediaQuery("(min-width: 350px)")
+  const isLarge = useMediaQuery("(min-width: 400px)")
 
   return (
     <Form {...form}>
-      <form>
+      <form
+        onSubmit={form.handleSubmit((data) => {
+          addTournamentAction({
+            title: data.title,
+            subtitle: data.subtitle || null,
+            defendingChampion: data.defendingChampion,
+            startDate: data.date.from,
+            endDate: data.date.to || null,
+            format: data.format,
+            startingTime: data.startingTime,
+            increment: data.increment,
+          })
+        })}
+      >
         <CardContent className="space-y-2 p-3">
           <FormField
             control={form.control}
             name="title"
             render={({ field }) => (
-              <div className="flex gap-2 items-center">
-                <FormLabel className="w-24 min-w-24">Title:</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-              </div>
+              <FormItem>
+                <div className="flex gap-2 items-center">
+                  <FormLabel className="w-24 min-w-24">Title:</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                </div>
+              </FormItem>
             )}
           />
           <FormField
             control={form.control}
             name="subtitle"
             render={({ field }) => (
-              <div className="flex gap-2 items-center">
-                <FormLabel className="w-24 min-w-24">Subtitle:</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-              </div>
+              <FormItem>
+                <div className="flex gap-2 items-center">
+                  <FormLabel className="w-24 min-w-24">Subtitle:</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                </div>
+              </FormItem>
             )}
           />
           <FormField
             control={form.control}
             name="defendingChampion"
             render={({ field }) => (
-              <div className="flex gap-2 items-center">
-                <FormLabel className="w-24 min-w-24">Defending:</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-              </div>
+              <FormItem>
+                <div className="flex gap-2 items-center">
+                  <FormLabel className="w-24 min-w-24">Defending:</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                </div>
+              </FormItem>
             )}
           />
           <FormField
@@ -233,7 +197,44 @@ function TournamentForm({
               </FormItem>
             )}
           />
-          <FormField
+          <div className="flex gap-2 justify-stretch">
+            <FormField
+              control={form.control}
+              name="startingTime"
+              render={({ field }) => (
+                <FormItem className="flex-1 basis-24">
+                  <div className="flex gap-2 items-center">
+                    <FormLabel className="w-24 min-w-24">
+                      Time Control:
+                    </FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <span className="whitespace-nowrap text-muted-foreground">
+                      {isLarge ? "min +" : "+"}
+                    </span>
+                  </div>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="increment"
+              render={({ field }) => (
+                <FormItem className="flex-1 basis-0">
+                  <div className="flex gap-2 items-center">
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    {isLarge && (
+                      <span className="text-muted-foreground">sec</span>
+                    )}
+                  </div>
+                </FormItem>
+              )}
+            />
+          </div>
+          {/* <FormField
             control={form.control}
             name="timeControl"
             render={({ field }) => (
@@ -261,7 +262,7 @@ function TournamentForm({
                 </div>
               </FormItem>
             )}
-          />
+          /> */}
         </CardContent>
         <CardFooter className="flex gap-2 p-3">
           <Button className="flex-1">{tournament ? "Save" : "Add"}</Button>

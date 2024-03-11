@@ -5,18 +5,14 @@ import { Button } from "../ui/button"
 import { format } from "date-fns"
 import { CalendarIcon } from "lucide-react"
 import { Calendar } from "../ui/calendar"
-import type { Matcher, SelectRangeEventHandler } from "react-day-picker"
+import type { SelectRangeEventHandler } from "react-day-picker"
 
 export function FormDateRangePicker({
   date,
   onSelect,
-  disabled,
-  defaultMonth,
 }: {
-  date: { from: Date; to: Date }
+  date: { from: Date; to?: Date }
   onSelect: SelectRangeEventHandler
-  disabled?: Matcher | Matcher[]
-  defaultMonth?: Date
 }) {
   return (
     <Popover>
@@ -50,10 +46,9 @@ export function FormDateRangePicker({
       <PopoverContent className="w-auto p-0" align="start">
         <Calendar
           mode="range"
-          defaultMonth={defaultMonth ?? date?.from}
+          defaultMonth={date?.from}
           selected={date}
           onSelect={onSelect}
-          disabled={disabled}
           initialFocus
         />
       </PopoverContent>

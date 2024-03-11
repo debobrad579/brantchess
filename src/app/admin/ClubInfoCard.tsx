@@ -1,6 +1,5 @@
 "use client"
 
-import { FormDateRangePicker } from "@/components/forms/FormDateRangePicker"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Form, FormControl, FormField, FormLabel } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
@@ -45,7 +44,7 @@ export function ClubInfoCard() {
                 </div>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name="date"
               render={({ field }) => (
@@ -58,7 +57,7 @@ export function ClubInfoCard() {
                   />
                 </div>
               )}
-            />
+            /> */}
           </CardContent>
         </form>
       </Form>
