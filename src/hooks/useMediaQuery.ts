@@ -25,7 +25,7 @@ export function useMediaQuery(mediaQuery: string) {
         mediaQueryList.removeEventListener("change", handleChange)
       }
     }
-  }, [])
+  }, [mediaQueryList])
 
   useEventListener(
     "change",
