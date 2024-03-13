@@ -1,18 +1,68 @@
-import { Tournament } from "@prisma/client"
+import type { Tournament } from "@prisma/client"
 import prisma from "./db"
 import { unstable_cache } from "next/cache"
+import { addMonths, addWeeks } from "date-fns"
 
-export async function createTournament(tournament: Omit<Tournament, "id">) {
-  return await prisma.tournament.create({
-    data: tournament,
+export function createTournament(tournamentData: Omit<Tournament, "id">) {
+  return prisma.tournament.create({
+    data: tournamentData,
+  })
+}
+
+export function updateTournament(
+  tournamentData: Omit<Tournament, "id">,
+  tournamentId: number
+) {
+  return prisma.tournament.update({
+    where: {
+      id: tournamentId,
+    },
+    data: tournamentData,
   })
 }
 
 export const getTournaments = unstable_cache(() => {
-  console.log("DB")
-  return prisma.tournament.findMany()
+  return prisma.tournament.findMany({
+    orderBy: [{ startDate: "asc" }, { endDate: "asc" }],
+  })
 }, ["Tournaments"])
 
-export async function clearTournaments() {
-  return await prisma.tournament.deleteMany()
+export const getUpcomingTournaments = unstable_cache(() => {
+  return prisma.tournament.findMany({
+    orderBy: [{ startDate: "asc" }, { endDate: "asc" }],
+    where: {
+      startDate: { lte: addMonths(new Date(), 4) },
+      OR: [
+        {
+          endDate: { gte: addWeeks(new Date(), -1) },
+        },
+        {
+          startDate: { gte: addMonths(new Date(), -1) },
+          endDate: null,
+        },
+      ],
+    },
+  })
+}, ["Tournaments", "Upcoming"])
+
+export function deleteTournament(tournamentId: number) {
+  return prisma.tournament.delete({
+    where: { id: tournamentId },
+  })
+}
+
+export function deleteOldTournaments() {
+  return prisma.tournament.deleteMany({
+    where: {
+      OR: [
+        {
+          endDate: { lte: addWeeks(new Date(), -1) },
+        },
+        {
+          startDate: { lte: addMonths(new Date(), -1) },
+          endDate: null,
+        },
+      ],
+    },
+  })
 }

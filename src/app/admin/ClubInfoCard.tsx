@@ -1,9 +1,17 @@
 "use client"
 
+import { FormDateRangePicker } from "@/components/forms/FormDateRangePicker"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Form, FormControl, FormField, FormLabel } from "@/components/ui/form"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
+import { Textarea } from "@/components/ui/textarea"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { isWednesday } from "date-fns"
 import { useForm } from "react-hook-form"
@@ -15,6 +23,7 @@ const formSchema = z.object({
     from: z.date(),
     to: z.date(),
   }),
+  homeText: z.string(),
 })
 
 export function ClubInfoCard() {
@@ -26,7 +35,7 @@ export function ClubInfoCard() {
   })
 
   return (
-    <Card>
+    <Card className="flex-1">
       <CardHeader className="text-xl font-bold">Club Information</CardHeader>
       <Separator />
       <Form {...form}>
@@ -36,12 +45,26 @@ export function ClubInfoCard() {
               control={form.control}
               name="location"
               render={({ field }) => (
-                <div className="flex gap-2 items-center">
-                  <FormLabel className="w-24 min-w-24">Location:</FormLabel>
+                <FormItem>
+                  <div className="flex gap-2 items-center">
+                    <FormLabel className="w-24 min-w-24">Location:</FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                  </div>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="homeText"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Home Content</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Textarea {...field} />
                   </FormControl>
-                </div>
+                </FormItem>
               )}
             />
             {/* <FormField

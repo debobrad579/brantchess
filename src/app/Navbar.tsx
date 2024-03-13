@@ -27,6 +27,7 @@ export function Navbar() {
     <nav className="w-screen flex items-center justify-between px-5 py-6 bg-navbar text-navbar-foreground sm:px-10 md:px-20">
       <Link href="/">
         <Image
+          priority
           src={brantchessLogo}
           alt="Brantford Chess Club Logo"
           width="100"

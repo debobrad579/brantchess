@@ -12,10 +12,24 @@ model Tournament {
   id                Int       @id @default(autoincrement())
   title             String
   subtitle          String?
-  defendingChampion String
+  defendingChampion String?
   startDate         DateTime
   endDate           DateTime?
   format            String
   startingTime      Int
   increment         Int
+}
+
+model Champion {
+  firstInitial String
+  lastName     String
+  years        Int[]
+
+  @@unique([firstInitial, lastName])
+}
+
+model HomeInformation {
+  location    String @unique
+  locationUrl String
+  content     String
 }

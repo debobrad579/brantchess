@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: `%s | Brantford Chess Club`,
   },
   description:
-    "The Brantford Chess Club is dedicated to the play and promotion of chess in the Brantford area.",
+    "WELCOME TO THE BRANTFORD CHESS CLUB CELEBRATING OVER 100 YEARS OF CHESS!",
 }
 
 export default function RootLayout({

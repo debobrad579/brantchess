@@ -5,14 +5,16 @@ import { Button } from "../ui/button"
 import { format } from "date-fns"
 import { CalendarIcon } from "lucide-react"
 import { Calendar } from "../ui/calendar"
-import type { SelectRangeEventHandler } from "react-day-picker"
+import type { Matcher, SelectRangeEventHandler } from "react-day-picker"
 
 export function FormDateRangePicker({
   date,
   onSelect,
+  disabled,
 }: {
   date: { from: Date; to?: Date }
   onSelect: SelectRangeEventHandler
+  disabled?: Matcher | Matcher[]
 }) {
   return (
     <Popover>
@@ -50,6 +52,7 @@ export function FormDateRangePicker({
           selected={date}
           onSelect={onSelect}
           initialFocus
+          disabled={disabled}
         />
       </PopoverContent>
     </Popover>
