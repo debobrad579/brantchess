@@ -13,14 +13,15 @@ import {
   updateTournament,
 } from "@/db/tournaments"
 import { Champion, Tournament } from "@prisma/client"
-import { revalidateTag } from "next/cache"
+import { revalidatePath } from "next/cache"
 
 export async function addTournamentAction(
   tournamentData: Omit<Tournament, "id">
 ) {
   await createTournament(tournamentData)
   await deleteOldTournaments()
-  revalidateTag("tournaments")
+  revalidatePath("/schedule")
+  revalidatePath("/admin")
 }
 
 export async function updateTournamentAction(
@@ -28,33 +29,38 @@ export async function updateTournamentAction(
   tournamentId: number
 ) {
   await updateTournament(tournamentData, tournamentId)
-  revalidateTag("tournaments")
+  revalidatePath("/schedule")
+  revalidatePath("/admin")
 }
 
 export async function deleteTournamentAction(tournamentId: number) {
   await deleteTournament(tournamentId)
-  revalidateTag("tournaments")
+  revalidatePath("/schedule")
+  revalidatePath("/admin")
 }
 
 export async function addYearToChampionAction(
   data: Omit<Champion, "years"> & { year: number }
 ) {
   await addYearToChampion(data)
-  revalidateTag("champions")
+  revalidatePath("/champions")
+  revalidatePath("/admin")
 }
 
 export async function removeYearFromChampionAction(
   data: Omit<Champion, "years"> & { year: number }
 ) {
   await removeYearFromChampion(data)
-  revalidateTag("champions")
+  revalidatePath("/champions")
+  revalidatePath("/admin")
 }
 
 export async function createChampionAction(
   data: Omit<Champion, "years"> & { year: number }
 ) {
   await createChampion(data)
-  revalidateTag("champions")
+  revalidatePath("/champions")
+  revalidatePath("/admin")
 }
 
 export async function deleteChampionAction(
@@ -62,5 +68,6 @@ export async function deleteChampionAction(
   lastName: string
 ) {
   await deleteChampion(firstInitial, lastName)
-  revalidateTag("champions")
+  revalidatePath("/champions")
+  revalidatePath("/admin")
 }
