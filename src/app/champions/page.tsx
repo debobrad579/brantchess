@@ -50,11 +50,7 @@ export default async function ChampionsPage() {
                 {champion.firstInitial}.
               </TableCell>
               <TableCell>{champion.lastName}:</TableCell>
-              <TableCell>
-                {champion.years
-                  .map((year) => year.toString().slice(-2))
-                  .join(", ")}
-              </TableCell>
+              <TableCell>{formatYears(champion.years)}</TableCell>
               <TableCell className="text-right">
                 {champion.years.length}
               </TableCell>
@@ -87,4 +83,9 @@ export default async function ChampionsPage() {
       </div>
     </>
   )
+}
+
+function formatYears(years: number[]) {
+  years.sort((a, b) => a - b)
+  return years.map((year) => year.toString().slice(-2)).join(", ")
 }
