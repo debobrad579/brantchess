@@ -51,10 +51,10 @@ export default async function ChampionsPage() {
               </TableCell>
               <TableCell>{champion.lastName}:</TableCell>
               <TableCell>
-                {champion.years
-                  .toSorted((a, b) => a - b)
-                  .map((year) => year.toString().slice(-2))
-                  .join(", ")}
+                {champion.years}
+                {/* // .toSorted((a, b) => a - b)
+                  // .map((year) => year.toString().slice(-2))
+                  // .join(", ") */}
               </TableCell>
               <TableCell className="text-right">
                 {champion.years.length}
