@@ -21,29 +21,37 @@ export function updateTournament(
   })
 }
 
-export const getTournaments = unstable_cache(() => {
-  return prisma.tournament.findMany({
-    orderBy: [{ startDate: "asc" }, { endDate: "asc" }],
-  })
-}, ["Tournaments"])
+export const getTournaments = unstable_cache(
+  () => {
+    return prisma.tournament.findMany({
+      orderBy: [{ startDate: "asc" }, { endDate: "asc" }],
+    })
+  },
+  ["Tournaments"],
+  { tags: ["tournaments"] }
+)
 
-export const getUpcomingTournaments = unstable_cache(() => {
-  return prisma.tournament.findMany({
-    orderBy: [{ startDate: "asc" }, { endDate: "asc" }],
-    where: {
-      startDate: { lte: addMonths(new Date(), 4) },
-      OR: [
-        {
-          endDate: { gte: addWeeks(new Date(), -1) },
-        },
-        {
-          startDate: { gte: addMonths(new Date(), -1) },
-          endDate: null,
-        },
-      ],
-    },
-  })
-}, ["Tournaments", "Upcoming"])
+export const getUpcomingTournaments = unstable_cache(
+  () => {
+    return prisma.tournament.findMany({
+      orderBy: [{ startDate: "asc" }, { endDate: "asc" }],
+      where: {
+        startDate: { lte: addMonths(new Date(), 4) },
+        OR: [
+          {
+            endDate: { gte: addWeeks(new Date(), -1) },
+          },
+          {
+            startDate: { gte: addMonths(new Date(), -1) },
+            endDate: null,
+          },
+        ],
+      },
+    })
+  },
+  ["Tournaments", "Upcoming"],
+  { tags: ["tournaments"] }
+)
 
 export function deleteTournament(tournamentId: number) {
   return prisma.tournament.delete({

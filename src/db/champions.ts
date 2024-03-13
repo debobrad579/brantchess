@@ -9,12 +9,17 @@ export const getOrderedChampions = unstable_cache(
       ORDER BY array_length(years, 1) DESC, average_years DESC;
     `
   },
-  ["Champions", "Ordered"]
+  ["Champions", "Ordered"],
+  { tags: ["champions"] }
 )
 
-export const getChampions = unstable_cache(() => {
-  return prisma.champion.findMany()
-}, ["Champions"])
+export const getChampions = unstable_cache(
+  () => {
+    return prisma.champion.findMany()
+  },
+  ["Champions"],
+  { tags: ["champions"] }
+)
 
 export function createChampion({
   firstInitial,
