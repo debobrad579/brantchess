@@ -51,9 +51,7 @@ export default async function ChampionsPage() {
               </TableCell>
               <TableCell>{champion.lastName}:</TableCell>
               <TableCell>{formatYears(champion.years)}</TableCell>
-              <TableCell className="text-right">
-                {champion.years.length}
-              </TableCell>
+              <TableCell className="text-right">{champion.total}</TableCell>
             </TableRow>
           ))}
         </TableBody>

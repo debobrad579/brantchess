@@ -50,7 +50,7 @@ export const getUpcomingTournaments = unstable_cache(
     })
   },
   ["Tournaments", "Upcoming"],
-  { tags: ["tournaments"] }
+  { tags: ["tournaments"], revalidate: 604800 }
 )
 
 export function deleteTournament(tournamentId: number) {

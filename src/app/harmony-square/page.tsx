@@ -1,6 +1,8 @@
 import Image from "next/image"
 import type { Metadata } from "next"
 import harmonySquare from "@/assets/img/harmony-square.jpg"
+import { getHarmonySquareInfo } from "@/db/harmony_square"
+import { format, getYear } from "date-fns"
 
 export const metadata: Metadata = {
   title: "Harmony Square",
@@ -8,12 +10,16 @@ export const metadata: Metadata = {
     "Come out and enjoy a friendly game of chess at Harmony Square this summer.",
 }
 
-export default function HarmonySquarePage() {
+export default async function HarmonySquarePage() {
+  const harmonySquareInfo = (await getHarmonySquareInfo())[0]
+  const year = getYear(harmonySquareInfo.startDate)
+
   return (
     <>
-      <h1 className="text-2xl font-bold">2024 HARMONY SQUARE PROGRAM</h1>
+      <h1 className="text-2xl font-bold">{year} HARMONY SQUARE PROGRAM</h1>
       <p className="font-bold">
-        Begins July 9 until August 26, 2024
+        Begins {format(harmonySquareInfo.startDate, "MMMM do")} until{" "}
+        {format(harmonySquareInfo.endDate, "MMMM do")}, {year}
         <br />
         Tuesday and Thursday 12 pm - 2 pm
       </p>
@@ -30,20 +36,17 @@ export default function HarmonySquarePage() {
       <div className="flex flex-col gap-4 lg:flex-row lg:justify-between">
         <div className="flex flex-col gap-4">
           <h2 className="text-xl font-bold">
-            Harmony Square Chess Tournaments for 2024
+            Harmony Square Chess Tournaments for {year}
           </h2>
-          <a
-            className="text-blue-500 hover:underline"
-            href="http://home.primus.ca/~rgash/FoodBank2024.pdf"
-          >
-            15th Annual Food Bank Charity Tournament Sunday July 21, 2024
-          </a>
-          <a
-            className="text-blue-500 hover:underline"
-            href="http://home.primus.ca/~rgash/KariNurmiMemorial2024.pdf"
-          >
-            2024 Kari Nurmi Harmony Square Active Sunday August 18, 2024
-          </a>
+          {harmonySquareInfo.tournamentTitles.map((title, index) => (
+            <a
+              key={index}
+              className="text-blue-500 hover:underline"
+              href={harmonySquareInfo.tournamentUrls[index]}
+            >
+              {title}
+            </a>
+          ))}
         </div>
         <div className="w-full relative aspect-[4/3] lg:w-1/2">
           <Image

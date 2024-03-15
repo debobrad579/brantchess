@@ -1,7 +1,7 @@
 "use client"
 
-import { FormDateRangePicker } from "@/components/forms/FormDateRangePicker"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import {
   Form,
   FormControl,
@@ -11,35 +11,47 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
-import { Textarea } from "@/components/ui/textarea"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { isWednesday } from "date-fns"
+import { Loader2 } from "lucide-react"
+import { useTransition } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { updateHomePageAction } from "./actions"
+import { HomeInformation } from "@prisma/client"
+import { AutosizeTextarea } from "@/components/ui/autoresize-textarea"
 
 const formSchema = z.object({
-  location: z.string(),
-  date: z.object({
-    from: z.date(),
-    to: z.date(),
-  }),
-  homeText: z.string(),
+  location: z.string().min(1),
+  locationUrl: z.string().min(1),
+  content: z.string().min(1),
 })
 
-export function ClubInfoCard() {
+export function ClubInfoCard({ homeInfo }: { homeInfo: HomeInformation }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      location: "10 Albion St. Brantford, Grace Anglican Church, Lower Level",
+      location: homeInfo.location,
+      locationUrl: homeInfo.locationUrl,
+      content: homeInfo.content,
     },
   })
 
+  const [isSaving, startSavingTransition] = useTransition()
+
   return (
     <Card className="flex-1">
-      <CardHeader className="text-xl font-bold">Club Information</CardHeader>
+      <CardHeader className="text-xl font-bold">
+        Home Page Information
+      </CardHeader>
       <Separator />
       <Form {...form}>
-        <form>
+        <form
+          onSubmit={form.handleSubmit((data) => {
+            startSavingTransition(async () => {
+              await updateHomePageAction(data)
+            })
+          })}
+        >
           <CardContent className="space-y-2 p-3">
             <FormField
               control={form.control}
@@ -57,31 +69,47 @@ export function ClubInfoCard() {
             />
             <FormField
               control={form.control}
-              name="homeText"
+              name="locationUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex gap-2 items-center">
+                    <FormLabel className="w-24 min-w-24">
+                      Location URL:
+                    </FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                  </div>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="content"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Home Content</FormLabel>
                   <FormControl>
-                    <Textarea {...field} />
+                    <AutosizeTextarea className="resize-none" {...field} />
                   </FormControl>
                 </FormItem>
               )}
             />
-            {/* <FormField
-              control={form.control}
-              name="date"
-              render={({ field }) => (
-                <div className="flex gap-2 items-center">
-                  <FormLabel className="w-24 min-w-24">Date:</FormLabel>
-                  <FormDateRangePicker
-                    date={field.value}
-                    onSelect={field.onChange}
-                    disabled={(date) => !isWednesday(date)}
-                  />
-                </div>
-              )}
-            /> */}
           </CardContent>
+          <CardFooter className="flex gap-2 p-3 pt-0">
+            <Button disabled={isSaving} className="flex-1">
+              {isSaving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {isSaving ? "Saving" : "Save"}
+            </Button>
+            <Button
+              disabled={isSaving}
+              variant="secondary"
+              type="button"
+              onClick={() => form.reset()}
+            >
+              Discard
+            </Button>
+          </CardFooter>
         </form>
       </Form>
     </Card>

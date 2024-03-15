@@ -3,10 +3,10 @@ import prisma from "./db"
 import { Champion, PrismaPromise } from "@prisma/client"
 
 export const getOrderedChampions = unstable_cache(
-  function (): PrismaPromise<Champion[]> {
+  function (): PrismaPromise<(Champion & { total: number })[]> {
     return prisma.$queryRaw`
-      SELECT *, (SELECT round(avg(value), 0) FROM unnest(years) AS value) AS average_years FROM "public"."Champion" 
-      ORDER BY array_length(years, 1) DESC, average_years DESC;
+      SELECT *, ARRAY_LENGTH("years", 1) AS "total" FROM "public"."Champion" 
+      ORDER BY "total" DESC, (SELECT AVG("value") FROM UNNEST("years") AS "value") DESC;
     `
   },
   ["Champions", "Ordered"],
@@ -62,7 +62,7 @@ export function removeYearFromChampion({
 }: Omit<Champion, "years"> & { year: number }): PrismaPromise<Champion> {
   return prisma.$queryRaw`
     UPDATE "public"."Champion"
-    SET years = array_remove(years, ${year})
+    SET "years" = array_remove("years", ${year})
     WHERE "firstInitial" = ${firstInitial} AND "lastName" = ${lastName};
   `
 }

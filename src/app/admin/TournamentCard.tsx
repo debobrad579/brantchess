@@ -269,7 +269,7 @@ function TournamentForm({
           />
         </CardContent>
         <CardFooter className="flex flex-col sm:flex-row gap-2 p-3">
-          <Button className="w-full" disabled={isSubmitting || isDeleting}>
+          <Button className="flex-1" disabled={isSubmitting || isDeleting}>
             {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {tournament
               ? isSubmitting
@@ -279,7 +279,7 @@ function TournamentForm({
               ? "Adding"
               : "Add"}
           </Button>
-          <div className="flex gap-2 w-full">
+          <div className="flex gap-2">
             <Button
               variant="secondary"
               type="button"
@@ -291,7 +291,7 @@ function TournamentForm({
             </Button>
             {tournament && (
               <Dialog>
-                <DialogTrigger className="flex-1">
+                <DialogTrigger className="flex-1" tabIndex={-1}>
                   <Button
                     variant="destructive"
                     disabled={isSubmitting || isDeleting}
@@ -304,7 +304,7 @@ function TournamentForm({
                 <DialogContent>
                   <DialogHeader>
                     <DialogTitle>
-                      Are you dure you want to delete this tournament?
+                      Are you sure you want to delete this tournament?
                     </DialogTitle>
                   </DialogHeader>
                   <Button

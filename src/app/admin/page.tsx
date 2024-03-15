@@ -4,19 +4,23 @@ import { HarmonySquareInfoCard } from "./HarmonySquareInfoCard"
 import { TournamentCard } from "./TournamentCard"
 import { ChampionsCard } from "./ChampionsCard"
 import { getChampions } from "@/db/champions"
+import { getHomePageInfo } from "@/db/home"
+import { getHarmonySquareInfo } from "@/db/harmony_square"
 
 export default async function AdminPage() {
   const tournaments = await getTournaments()
   const champions = await getChampions()
+  const homeInfo = (await getHomePageInfo())[0]
+  const harmonySquareInfo = (await getHarmonySquareInfo())[0]
 
   return (
     <div className="flex flex-col gap-4">
-      <ClubInfoCard />
-      <div className="flex flex-col gap-4 md:flex-row">
-        <HarmonySquareInfoCard />
-        <ChampionsCard champions={champions} />
-      </div>
+      <ClubInfoCard homeInfo={homeInfo} />
       <TournamentCard tournaments={tournaments} />
+      <div className="flex flex-col gap-4 md:flex-row">
+        <ChampionsCard champions={champions} />
+        <HarmonySquareInfoCard harmonySquareInfo={harmonySquareInfo} />
+      </div>
     </div>
   )
 }

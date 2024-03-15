@@ -29,7 +29,16 @@ model Champion {
 }
 
 model HomeInformation {
-  location    String @unique
+  id          Int    @id @default(autoincrement())
+  location    String
   locationUrl String
   content     String
+}
+
+model HarmonySquareInformation {
+  id               Int      @id @default(autoincrement())
+  startDate        DateTime
+  endDate          DateTime
+  tournamentTitles String[]
+  tournamentUrls   String[]
 }

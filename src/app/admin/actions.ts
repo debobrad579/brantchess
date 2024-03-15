@@ -6,13 +6,20 @@ import {
   deleteChampion,
   removeYearFromChampion,
 } from "@/db/champions"
+import { updateHarmonySquareInfo } from "@/db/harmony_square"
+import { updateHomePage } from "@/db/home"
 import {
   createTournament,
   deleteOldTournaments,
   deleteTournament,
   updateTournament,
 } from "@/db/tournaments"
-import { Champion, Tournament } from "@prisma/client"
+import {
+  Champion,
+  HarmonySquareInformation,
+  HomeInformation,
+  Tournament,
+} from "@prisma/client"
 import { revalidatePath } from "next/cache"
 
 export async function addTournamentAction(
@@ -69,5 +76,19 @@ export async function deleteChampionAction(
 ) {
   await deleteChampion(firstInitial, lastName)
   revalidatePath("/champions")
+  revalidatePath("/admin")
+}
+
+export async function updateHomePageAction(data: Omit<HomeInformation, "id">) {
+  await updateHomePage(data)
+  revalidatePath("/")
+  revalidatePath("/admin")
+}
+
+export async function updateHarmonySquarePageAction(
+  data: Omit<HarmonySquareInformation, "id">
+) {
+  await updateHarmonySquareInfo(data)
+  revalidatePath("/harmony-square")
   revalidatePath("/admin")
 }
