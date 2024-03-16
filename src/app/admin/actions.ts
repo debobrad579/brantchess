@@ -92,3 +92,13 @@ export async function updateHarmonySquarePageAction(
   revalidatePath("/harmony-square")
   revalidatePath("/admin")
 }
+
+export async function redirectToDashboard(
+  prevState: unknown,
+  formData: FormData
+): Promise<{ success?: boolean }> {
+  if (formData.get("password") === process.env.ADMIN_PASSWORD) {
+    return { success: true }
+  }
+  return { success: false }
+}
