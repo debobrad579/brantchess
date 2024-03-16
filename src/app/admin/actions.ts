@@ -20,7 +20,7 @@ import {
   HomeInformation,
   Tournament,
 } from "@prisma/client"
-import { revalidatePath } from "next/cache"
+import { revalidatePath, revalidateTag } from "next/cache"
 
 export async function addTournamentAction(
   tournamentData: Omit<Tournament, "id">
@@ -29,6 +29,7 @@ export async function addTournamentAction(
   await deleteOldTournaments()
   revalidatePath("/schedule")
   revalidatePath("/admin")
+  revalidateTag("tournaments")
 }
 
 export async function updateTournamentAction(
@@ -38,12 +39,14 @@ export async function updateTournamentAction(
   await updateTournament(tournamentData, tournamentId)
   revalidatePath("/schedule")
   revalidatePath("/admin")
+  revalidateTag("tournaments")
 }
 
 export async function deleteTournamentAction(tournamentId: number) {
   await deleteTournament(tournamentId)
   revalidatePath("/schedule")
   revalidatePath("/admin")
+  revalidateTag("tournaments")
 }
 
 export async function addYearToChampionAction(
@@ -52,6 +55,7 @@ export async function addYearToChampionAction(
   await addYearToChampion(data)
   revalidatePath("/champions")
   revalidatePath("/admin")
+  revalidateTag("champions")
 }
 
 export async function removeYearFromChampionAction(
@@ -60,6 +64,7 @@ export async function removeYearFromChampionAction(
   await removeYearFromChampion(data)
   revalidatePath("/champions")
   revalidatePath("/admin")
+  revalidateTag("champions")
 }
 
 export async function createChampionAction(
@@ -68,6 +73,7 @@ export async function createChampionAction(
   await createChampion(data)
   revalidatePath("/champions")
   revalidatePath("/admin")
+  revalidateTag("champions")
 }
 
 export async function deleteChampionAction(
@@ -77,12 +83,14 @@ export async function deleteChampionAction(
   await deleteChampion(firstInitial, lastName)
   revalidatePath("/champions")
   revalidatePath("/admin")
+  revalidateTag("champions")
 }
 
 export async function updateHomePageAction(data: Omit<HomeInformation, "id">) {
   await updateHomePage(data)
   revalidatePath("/")
   revalidatePath("/admin")
+  revalidateTag("homePage")
 }
 
 export async function updateHarmonySquarePageAction(
@@ -91,6 +99,7 @@ export async function updateHarmonySquarePageAction(
   await updateHarmonySquareInfo(data)
   revalidatePath("/harmony-square")
   revalidatePath("/admin")
+  revalidateTag("harmonySquareInfo")
 }
 
 export async function redirectToDashboard(

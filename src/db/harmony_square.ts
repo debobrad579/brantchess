@@ -7,7 +7,7 @@ export const getHarmonySquareInfo = unstable_cache(
     return prisma.harmonySquareInformation.findMany()
   },
   ["HarmonySquareInfo"],
-  { tags: ["HarmonySquareInfo"] }
+  { tags: ["HarmonySquareInfo"], revalidate: false }
 )
 
 export function updateHarmonySquareInfo(
