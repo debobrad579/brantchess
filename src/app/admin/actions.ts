@@ -27,8 +27,6 @@ export async function addTournamentAction(
 ) {
   await createTournament(tournamentData)
   await deleteOldTournaments()
-  revalidatePath("/schedule")
-  revalidatePath("/admin")
   revalidateTag("tournaments")
 }
 
@@ -37,15 +35,11 @@ export async function updateTournamentAction(
   tournamentId: number
 ) {
   await updateTournament(tournamentData, tournamentId)
-  revalidatePath("/schedule")
-  revalidatePath("/admin")
   revalidateTag("tournaments")
 }
 
 export async function deleteTournamentAction(tournamentId: number) {
   await deleteTournament(tournamentId)
-  revalidatePath("/schedule")
-  revalidatePath("/admin")
   revalidateTag("tournaments")
 }
 
@@ -53,8 +47,6 @@ export async function addYearToChampionAction(
   data: Omit<Champion, "years"> & { year: number }
 ) {
   await addYearToChampion(data)
-  revalidatePath("/champions")
-  revalidatePath("/admin")
   revalidateTag("champions")
 }
 
@@ -62,8 +54,6 @@ export async function removeYearFromChampionAction(
   data: Omit<Champion, "years"> & { year: number }
 ) {
   await removeYearFromChampion(data)
-  revalidatePath("/champions")
-  revalidatePath("/admin")
   revalidateTag("champions")
 }
 
@@ -71,8 +61,6 @@ export async function createChampionAction(
   data: Omit<Champion, "years"> & { year: number }
 ) {
   await createChampion(data)
-  revalidatePath("/champions")
-  revalidatePath("/admin")
   revalidateTag("champions")
 }
 
@@ -81,15 +69,11 @@ export async function deleteChampionAction(
   lastName: string
 ) {
   await deleteChampion(firstInitial, lastName)
-  revalidatePath("/champions")
-  revalidatePath("/admin")
   revalidateTag("champions")
 }
 
 export async function updateHomePageAction(data: Omit<HomeInformation, "id">) {
   await updateHomePage(data)
-  revalidatePath("/")
-  revalidatePath("/admin")
   revalidateTag("homePage")
 }
 
@@ -97,8 +81,6 @@ export async function updateHarmonySquarePageAction(
   data: Omit<HarmonySquareInformation, "id">
 ) {
   await updateHarmonySquareInfo(data)
-  revalidatePath("/harmony-square")
-  revalidatePath("/admin")
   revalidateTag("harmonySquareInfo")
 }
 
