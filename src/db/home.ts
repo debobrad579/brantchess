@@ -13,5 +13,5 @@ export const getHomePageInfo = unstable_cache(
     return prisma.homeInformation.findMany()
   },
   ["HomePage"],
-  { tags: ["homePage"], revalidate: false }
+  { tags: ["homePage"], revalidate: 1 }
 )

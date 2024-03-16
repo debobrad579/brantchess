@@ -28,7 +28,7 @@ export const getTournaments = unstable_cache(
     })
   },
   ["Tournaments"],
-  { tags: ["tournaments"], revalidate: false }
+  { tags: ["tournaments"], revalidate: 1 }
 )
 
 export const getUpcomingTournaments = unstable_cache(
