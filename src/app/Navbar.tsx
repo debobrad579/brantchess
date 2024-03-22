@@ -24,7 +24,7 @@ export function Navbar() {
   const pathname = usePathname()
 
   return (
-    <nav className="w-screen flex items-center justify-between px-5 py-6 bg-navbar text-navbar-foreground sm:px-10 md:px-20">
+    <nav className="flex items-center justify-between px-5 py-2 bg-navbar text-navbar-foreground sm:px-10 md:px-20 relative">
       <Link href="/">
         <Image
           priority
@@ -181,7 +181,7 @@ export function Navbar() {
               <Button
                 variant={null}
                 size="icon"
-                className="hover:bg-navbar-muted"
+                className="hover:bg-navbar-muted relative"
               >
                 <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-transform dark:-rotate-90 dark:scale-0" />
                 <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-transform dark:rotate-0 dark:scale-100" />

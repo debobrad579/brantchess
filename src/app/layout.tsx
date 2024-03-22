@@ -5,6 +5,7 @@ import { Navbar } from "./Navbar"
 import { Footer } from "./Footer"
 import { roboto } from "@/assets/fonts"
 import "./globals.css"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 export const metadata: Metadata = {
   title: {
@@ -24,19 +25,21 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={roboto.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="flex flex-col justify-between h-screen">
-            <div>
-              <Navbar />
-              <Separator />
-              <main className="px-5 py-10 flex flex-col gap-4 sm:px-10 md:px-20 lg:px-[10vw] 2xl:px-[20vw]">
-                {children}
-              </main>
+          <ScrollArea>
+            <div className="flex flex-col justify-between h-screen">
+              <div>
+                <Navbar />
+                <Separator />
+                <main className="px-5 py-10 space-y-4 sm:px-10 md:px-20 lg:px-[10vw]">
+                  {children}
+                </main>
+              </div>
+              <div>
+                <Separator />
+                <Footer />
+              </div>
             </div>
-            <div>
-              <Separator />
-              <Footer />
-            </div>
-          </div>
+          </ScrollArea>
         </ThemeProvider>
       </body>
     </html>

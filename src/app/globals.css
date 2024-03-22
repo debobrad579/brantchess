@@ -83,4 +83,7 @@
   body {
     @apply bg-background text-foreground leading-6;
   }
+  main a {
+    @apply text-blue-500 hover:underline;
+  }
 }

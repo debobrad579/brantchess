@@ -20,10 +20,7 @@ export default function JrClubPage() {
         and tips on how to improve your game.
       </p>
       <div>
-        <a
-          href="https://calendar.brantfordlibrary.ca/default/Detail/2024-01-06-1000-Chess-Club"
-          className="text-blue-500 hover:underline"
-        >
+        <a href="https://calendar.brantfordlibrary.ca/default/Detail/2024-01-06-1000-Chess-Club">
           Library Program Schedule
         </a>
       </div>
@@ -37,26 +34,17 @@ export default function JrClubPage() {
       </p>
       <ul className="ml-8">
         <li className="list-disc">
-          <a
-            href="http://home.primus.ca/~rgash/Fritz532/532Setup.exe"
-            className="text-blue-500 hover:underline"
-          >
+          <a href="http://home.primus.ca/~rgash/Fritz532/532Setup.exe">
             Fritz 5.32 Chess Program
           </a>
         </li>
         <li className="list-disc">
-          <a
-            href="http://home.primus.ca/~rgash/Fritz532/100%20Mates%20in%201.zip"
-            className="text-blue-500 hover:underline"
-          >
+          <a href="http://home.primus.ca/~rgash/Fritz532/100%20Mates%20in%201.zip">
             100 Checkmates in 1 (Polgar 5334)
           </a>
         </li>
         <li className="list-disc">
-          <a
-            href="http://www.chesskid.com/video/player/the-magic-of-chess"
-            className="text-blue-500 hover:underline"
-          >
+          <a href="http://www.chesskid.com/video/player/the-magic-of-chess">
             Chess pieces and how they move
           </a>
         </li>
@@ -64,20 +52,10 @@ export default function JrClubPage() {
       <h2 className="text-xl font-bold">Junior Friendly Links:</h2>
       <ul className="ml-8">
         <li className="list-disc">
-          <a
-            href="http://www.chesskid.com/"
-            className="text-blue-500 hover:underline"
-          >
-            ChessKid.com
-          </a>
+          <a href="http://www.chesskid.com/">ChessKid.com</a>
         </li>
         <li className="list-disc">
-          <a
-            href="http://www.chesskids.org.uk/"
-            className="text-blue-500 hover:underline"
-          >
-            chessKIDS academy
-          </a>
+          <a href="http://www.chesskids.org.uk/">chessKIDS academy</a>
         </li>
       </ul>
     </>
