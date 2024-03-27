@@ -27,7 +27,7 @@ export default async function Home() {
               {homeInfo?.location}
             </a>
           </h2>
-          <p
+          <div
             dangerouslySetInnerHTML={{ __html: homeInfo?.content }}
             className="space-y-4"
           />

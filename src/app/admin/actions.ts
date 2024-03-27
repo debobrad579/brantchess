@@ -20,7 +20,7 @@ import {
   HomeInformation,
   Tournament,
 } from "@prisma/client"
-import { revalidatePath, revalidateTag } from "next/cache"
+import { revalidateTag } from "next/cache"
 
 export async function addTournamentAction(
   tournamentData: Omit<Tournament, "id">

@@ -158,7 +158,7 @@ export function ChampionsCard({ champions }: { champions: Champion[] }) {
                         champion.lastName === field.value.lastName
                     ) && (
                       <Dialog>
-                        <DialogTrigger tabIndex={-1}>
+                        <DialogTrigger asChild>
                           <Button
                             variant="destructive"
                             type="button"

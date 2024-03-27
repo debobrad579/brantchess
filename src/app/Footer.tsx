@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className="bg-navbar text-navbar-foreground flex flex-col justify-between gap-4 px-5 py-6 md:flex-row md:gap-8 sm:px-10 md:px-20">
+    <footer className="bg-navbar text-navbar-foreground flex flex-col justify-between gap-4 px-5 py-4 md:flex-row md:gap-8 sm:px-10 md:px-20">
       <div className="flex-1 flex flex-col gap-4">
         <h2 className="text-xl">Contact Information</h2>
         <div className="flex flex-col gap-2 text-navbar-muted-foreground">

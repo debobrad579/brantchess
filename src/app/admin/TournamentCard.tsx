@@ -54,7 +54,7 @@ export function TournamentCard({ tournaments }: { tournaments: Tournament[] }) {
 
   return (
     <Card>
-      <CardHeader className="text-xl font-bold">Tournaments</CardHeader>
+      <CardHeader className="text-xl font-bold">Events</CardHeader>
       <Separator />
       {isOpen ? (
         <TournamentForm
@@ -291,7 +291,7 @@ function TournamentForm({
             </Button>
             {tournament && (
               <Dialog>
-                <DialogTrigger className="flex-1" tabIndex={-1}>
+                <DialogTrigger className="flex-1" asChild>
                   <Button
                     variant="destructive"
                     disabled={isSubmitting || isDeleting}

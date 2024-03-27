@@ -6,7 +6,8 @@ import { ChampionsCard } from "./ChampionsCard"
 import { getChampions } from "@/db/champions"
 import { getHomePageInfo } from "@/db/home"
 import { getHarmonySquareInfo } from "@/db/harmony_square"
-import { PasswordForm } from "./PasswordForm"
+
+export const dynamic = "force-dynamic"
 
 export default async function AdminPage() {
   const tournaments = await getTournaments()
@@ -15,17 +16,13 @@ export default async function AdminPage() {
   const harmonySquareInfo = (await getHarmonySquareInfo())[0]
 
   return (
-    <PasswordForm
-      adminDashboard={
-        <div className="flex flex-col gap-4">
-          <ClubInfoCard homeInfo={homeInfo} />
-          <TournamentCard tournaments={tournaments} />
-          <div className="flex flex-col gap-4 md:flex-row">
-            <ChampionsCard champions={champions} />
-            <HarmonySquareInfoCard harmonySquareInfo={harmonySquareInfo} />
-          </div>
-        </div>
-      }
-    />
+    <div className="flex flex-col gap-4">
+      <ClubInfoCard homeInfo={homeInfo} />
+      <TournamentCard tournaments={tournaments} />
+      <div className="flex flex-col gap-4 md:flex-row">
+        <ChampionsCard champions={champions} />
+        <HarmonySquareInfoCard harmonySquareInfo={harmonySquareInfo} />
+      </div>
+    </div>
   )
 }

@@ -5,7 +5,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Schedule & Games",
-  description: "See the current tournament schedule.",
+  description: "See the upcoming tournament schedule.",
 }
 
 export default async function SchedulePage() {
