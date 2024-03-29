@@ -25,7 +25,7 @@ export function Navbar() {
   const isDesktop = useMediaQuery("(min-width: 1100px)")
 
   return (
-    <nav className="flex items-center justify-between px-5 py-2 bg-navbar text-navbar-foreground sm:px-10 md:px-20">
+    <nav className="flex items-center justify-between px-5 py-2 bg-navbar text-navbar-foreground sm:px-10 md:px-20 lg:px-[10vw]">
       <Link href="/">
         <Image
           priority
@@ -55,7 +55,9 @@ export function Navbar() {
               <NavLinkMobile href="/harmony-square">
                 Harmony Square
               </NavLinkMobile>
-              <NavLinkMobile href="/jr-club">Jr. Club</NavLinkMobile>
+              <NavLinkMobile href="/learning-resources">
+                Learning Resources
+              </NavLinkMobile>
               <DropdownMenuSub>
                 <DropdownMenuSubTrigger>Links</DropdownMenuSubTrigger>
                 <DropdownMenuPortal>
@@ -89,7 +91,9 @@ export function Navbar() {
             <NavLinkDesktop href="/harmony-square">
               Harmony Square
             </NavLinkDesktop>
-            <NavLinkDesktop href="/jr-club">Jr. Club</NavLinkDesktop>
+            <NavLinkDesktop href="/learning-resources">
+              Learning Resources
+            </NavLinkDesktop>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant={null} className="hover:bg-navbar-muted">
