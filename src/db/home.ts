@@ -10,7 +10,7 @@ export function updateHomePage(data: Omit<HomeInformation, "id">) {
 
 export const getHomePageInfo = unstable_cache(
   () => {
-    return prisma.homeInformation.findMany()
+    return prisma.homeInformation.findFirst()
   },
   ["HomePage"],
   { tags: ["homePage"], revalidate: 1 }

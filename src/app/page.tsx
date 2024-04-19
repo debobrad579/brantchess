@@ -1,18 +1,12 @@
 import { Tournament } from "@/components/page/Tournament"
 import { getHomePageInfo } from "@/db/home"
-import { getUpcomingTournaments } from "@/db/tournaments"
-import { addWeeks, isAfter, isBefore } from "date-fns"
+import { getCurrentTournaments, getNextTournament } from "@/db/tournaments"
+import { isAfter, isBefore } from "date-fns"
 
 export default async function Home() {
-  const homeInfo = (await getHomePageInfo())[0]
-  const tournaments = await getUpcomingTournaments()
-  const currentTournaments = tournaments.filter(
-    (tournament) =>
-      isBefore(
-        new Date(),
-        tournament.endDate ?? addWeeks(tournament.startDate, 1)
-      ) && isAfter(new Date(), tournament.startDate)
-  )
+  const homeInfo = (await getHomePageInfo())!
+  const currentTournaments = await getCurrentTournaments()
+  const nextTournaments = await getNextTournament()
 
   return (
     <>
@@ -37,7 +31,7 @@ export default async function Home() {
             <h2 className="text-xl font-bold">Current Event</h2>
           )}
           {currentTournaments.length > 1 && (
-            <h2 className="text-xl font-bold">Current Event</h2>
+            <h2 className="text-xl font-bold">Current Events</h2>
           )}
           {currentTournaments.map((currentTournament) => (
             <Tournament
@@ -48,13 +42,18 @@ export default async function Home() {
           {currentTournaments.length === 1 && (
             <>
               <h2 className="text-xl font-bold">Next Event</h2>
-              <Tournament
-                tournament={
-                  tournaments.filter(
-                    (tournament) => !currentTournaments.includes(tournament)
-                  )[0]
-                }
-              />
+              <Tournament tournament={nextTournaments[0]} />
+            </>
+          )}
+          {currentTournaments.length === 0 && (
+            <>
+              <h2 className="text-xl font-bold">Upcoming Events</h2>
+              {nextTournaments.map((nextTournament) => (
+                <Tournament
+                  tournament={nextTournament}
+                  key={nextTournament.id}
+                />
+              ))}
             </>
           )}
         </div>

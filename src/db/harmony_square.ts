@@ -4,7 +4,7 @@ import { HarmonySquareInformation } from "@prisma/client"
 
 export const getHarmonySquareInfo = unstable_cache(
   () => {
-    return prisma.harmonySquareInformation.findMany()
+    return prisma.harmonySquareInformation.findFirst()
   },
   ["HarmonySquareInfo"],
   { tags: ["harmonySquareInfo"], revalidate: 1 }

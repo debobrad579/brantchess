@@ -70,9 +70,19 @@ export function Footer() {
                 className="bg-navbar-muted hover:bg-navbar-muted/60 text-navbar-foreground"
                 asChild
               >
-                <Link href="/membership/student">
-                  Student, Junior, & Senior ($30)
-                </Link>
+                <Link href="/membership/student">Student ($30)</Link>
+              </Button>
+              <Button
+                className="bg-navbar-muted hover:bg-navbar-muted/60 text-navbar-foreground"
+                asChild
+              >
+                <Link href="/membership/junior">Junior ($30)</Link>
+              </Button>
+              <Button
+                className="bg-navbar-muted hover:bg-navbar-muted/60 text-navbar-foreground"
+                asChild
+              >
+                <Link href="/membership/senior">Senior ($30)</Link>
               </Button>
               <Button
                 className="bg-navbar-muted hover:bg-navbar-muted/60 text-navbar-foreground"

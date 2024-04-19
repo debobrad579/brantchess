@@ -12,8 +12,8 @@ export const dynamic = "force-dynamic"
 export default async function AdminPage() {
   const tournaments = await getTournaments()
   const champions = await getChampions()
-  const homeInfo = (await getHomePageInfo())[0]
-  const harmonySquareInfo = (await getHarmonySquareInfo())[0]
+  const homeInfo = (await getHomePageInfo())!
+  const harmonySquareInfo = (await getHarmonySquareInfo())!
 
   return (
     <div className="flex flex-col gap-4">

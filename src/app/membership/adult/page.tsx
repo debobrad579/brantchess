@@ -1,24 +1,16 @@
-import Stripe from "stripe"
-import { CheckoutForm } from "../CheckoutForm"
+import { formatCurrency } from "@/lib/formatters"
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
-
-const membership = { priceInCents: 4000, name: "Adult", description: "Desc" }
-
-export default async function MembershipPage() {
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: 4000,
-    currency: "CAD",
-    metadata: membership,
-  })
-
-  if (paymentIntent.client_secret == null)
-    throw Error("Stripe failed to create payment intent")
-
+export default function MembershipPage() {
   return (
-    <CheckoutForm
-      clientSecret={paymentIntent.client_secret}
-      membership={membership}
-    />
+    <div>
+      <div className="text-2xl font-bold">Adult Membership</div>
+      <div className="text-lg">{formatCurrency(40)}</div>
+      <div className="text-muted-foreground">
+        A one year membership for adults between the ages of 18 and 54.
+      </div>
+      <div className="text-muted-foreground text-sm">
+        Pay in person or etransfer $40 to brantchessca@gmail.com.
+      </div>
+    </div>
   )
 }

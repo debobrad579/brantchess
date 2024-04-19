@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 }
 
 export default async function HarmonySquarePage() {
-  const harmonySquareInfo = (await getHarmonySquareInfo())[0]
+  const harmonySquareInfo = (await getHarmonySquareInfo())!
   const year = getYear(harmonySquareInfo.startDate)
 
   return (

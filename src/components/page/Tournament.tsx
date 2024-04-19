@@ -1,5 +1,5 @@
 import { Tournament } from "@prisma/client"
-import { addWeeks, format, isAfter, isBefore } from "date-fns"
+import { addWeeks, format, isAfter, isBefore, isEqual } from "date-fns"
 
 export function Tournament({
   tournament,
@@ -13,11 +13,9 @@ export function Tournament({
       <div className="mb-2 flex items-center gap-2">
         <h2 className="font-bold text-xl">{tournament.title}</h2>
         {showCurrent &&
-          isBefore(
-            new Date(),
-            tournament.endDate ?? addWeeks(tournament.startDate, 1)
-          ) &&
-          isAfter(new Date(), tournament.startDate) && (
+          isAfter(new Date(), tournament.startDate) &&
+          (tournament.endDate == null ||
+            isBefore(new Date(), tournament.endDate)) && (
             <h3 className="font-bold text-lg">(Current)</h3>
           )}
       </div>
@@ -28,6 +26,8 @@ export function Tournament({
       <p>
         {tournament.endDate == null
           ? `Starts ${format(tournament.startDate, "MMMM do, y")}`
+          : isEqual(tournament.startDate, tournament.endDate)
+          ? format(tournament.startDate, "MMMM do, y")
           : `${format(tournament.startDate, "MMMM do")} - ${format(
               tournament.endDate,
               "MMMM do, y"
