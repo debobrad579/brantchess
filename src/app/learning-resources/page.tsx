@@ -14,10 +14,12 @@ export const metadata: Metadata = {
     "Here's some free resources to learn and improve at the game of chess.",
 }
 
-export default function JrClubPage() {
+export default function LearningResourcesPage() {
   return (
     <>
-      <h1 className="text-2xl font-bold">LEARNING RESOURCES/LIBRARY PROGRAM</h1>
+      <h1 className="text-2xl font-bold">
+        LIBRARY PROGRAM & LEARNING RESOURCES
+      </h1>
       <div className="flex gap-8 flex-col lg:flex-row">
         <div className="space-y-4 flex-1">
           <p>

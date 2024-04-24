@@ -77,7 +77,7 @@ export const getCurrentTournaments = unstable_cache(
   { tags: ["tournaments"], revalidate: 1 }
 )
 
-export const getNextTournament = unstable_cache(
+export const getNextTournaments = unstable_cache(
   () => {
     return prisma.tournament.findMany({
       orderBy: [

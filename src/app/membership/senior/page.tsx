@@ -6,7 +6,7 @@ export default function MembershipPage() {
       <div className="text-2xl font-bold">Senior Membership</div>
       <div className="text-lg">{formatCurrency(30)}</div>
       <div className="text-muted-foreground">
-        A one year membership for anyone who's 55 or above.
+        A one year membership for anyone who's 60 or above.
       </div>
       <div className="text-muted-foreground text-sm">
         Pay in person or etransfer $30 to brantchessca@gmail.com.

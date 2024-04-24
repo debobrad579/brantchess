@@ -1,12 +1,12 @@
 import { Tournament } from "@/components/page/Tournament"
 import { getHomePageInfo } from "@/db/home"
-import { getCurrentTournaments, getNextTournament } from "@/db/tournaments"
+import { getCurrentTournaments, getNextTournaments } from "@/db/tournaments"
 import { isAfter, isBefore } from "date-fns"
 
 export default async function Home() {
   const homeInfo = (await getHomePageInfo())!
   const currentTournaments = await getCurrentTournaments()
-  const nextTournaments = await getNextTournament()
+  const nextTournaments = await getNextTournaments()
 
   return (
     <>

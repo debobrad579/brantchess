@@ -48,9 +48,15 @@ export default async function HarmonySquarePage() {
             Harmony Square Chess Tournaments for {year}
           </h2>
           {harmonySquareInfo.tournamentTitles.map((title, index) => (
-            <a key={index} href={harmonySquareInfo.tournamentUrls[index]}>
-              {title}
-            </a>
+            <div>
+              <a
+                key={index}
+                target="_blank"
+                href={harmonySquareInfo.tournamentUrls[index]}
+              >
+                {title}
+              </a>
+            </div>
           ))}
         </div>
         <div className="flex-1">
