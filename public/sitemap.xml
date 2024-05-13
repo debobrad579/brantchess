@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:codesearch="http://www.google.com/codesearch/schemas/sitemap/1.0">
+  <url>
+    <loc>https://www.brantchess.ca</loc>
+    <lastmod>2024-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.brantchess.ca/schedule</loc>
+    <lastmod>2024-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.brantchess.ca/champions</loc>
+    <lastmod>2024-05-13</lastmod>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.brantchess.ca/harmony-square</loc>
+    <lastmod>2024-05-13</lastmod>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.brantchess.ca/learning-resources</loc>
+    <lastmod>2024-05-13</lastmod>
+    <changefreq>never</changefreq>
+  </url>
+</urlset>
