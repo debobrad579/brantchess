@@ -6,6 +6,7 @@ import { Footer } from "./Footer"
 import { roboto } from "@/assets/fonts"
 import "./globals.css"
 import { cn } from "@/lib/utils"
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: {
@@ -44,6 +45,7 @@ export default function RootLayout({
             </div>
           </div>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
