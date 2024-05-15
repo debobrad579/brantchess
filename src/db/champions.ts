@@ -10,7 +10,7 @@ export const getOrderedChampions = unstable_cache(
     `
   },
   ["Champions", "Ordered"],
-  { tags: ["champions"], revalidate: 1 }
+  { tags: ["champions"] }
 )
 
 export const getChampions = unstable_cache(
@@ -18,7 +18,7 @@ export const getChampions = unstable_cache(
     return prisma.champion.findMany()
   },
   ["Champions"],
-  { tags: ["champions"], revalidate: 1 }
+  { tags: ["champions"] }
 )
 
 export function createChampion({
