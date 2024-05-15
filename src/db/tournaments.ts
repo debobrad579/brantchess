@@ -2,6 +2,7 @@ import type { Tournament } from "@prisma/client"
 import prisma from "./db"
 import { unstable_cache } from "next/cache"
 import { addMonths, addWeeks } from "date-fns"
+import { cache } from "react"
 
 export function createTournament(tournamentData: Omit<Tournament, "id">) {
   return prisma.tournament.create({
@@ -32,7 +33,7 @@ export const getTournaments = unstable_cache(
 )
 
 export const getUpcomingTournaments = unstable_cache(
-  () => {
+  cache(() => {
     return prisma.tournament.findMany({
       orderBy: [
         { startDate: "asc" },
@@ -52,48 +53,9 @@ export const getUpcomingTournaments = unstable_cache(
       },
       take: 4,
     })
-  },
+  }),
   ["Tournaments", "Upcoming"],
-  { tags: ["tournaments"], revalidate: 604800 }
-)
-
-export const getCurrentTournaments = unstable_cache(
-  () => {
-    return prisma.tournament.findMany({
-      orderBy: [
-        { startDate: "asc" },
-        { endDate: "asc" },
-        { startingTime: "desc" },
-        { increment: "desc" },
-      ],
-      where: {
-        startDate: { lte: new Date() },
-        OR: [{ endDate: { gte: new Date() } }, { endDate: null }],
-      },
-      take: 2,
-    })
-  },
-  ["Tournaments", "Current"],
-  { tags: ["tournaments"], revalidate: 604800 }
-)
-
-export const getNextTournaments = unstable_cache(
-  () => {
-    return prisma.tournament.findMany({
-      orderBy: [
-        { startDate: "asc" },
-        { endDate: "asc" },
-        { startingTime: "desc" },
-        { increment: "desc" },
-      ],
-      where: {
-        startDate: { gt: new Date() },
-      },
-      take: 2,
-    })
-  },
-  ["Tournaments", "Next"],
-  { tags: ["tournaments"], revalidate: 604800 }
+  { tags: ["tournaments"], revalidate: 86400 }
 )
 
 export function deleteTournament(tournamentId: number) {
