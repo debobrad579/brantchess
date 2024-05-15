@@ -1,5 +1,5 @@
 import { Tournament } from "@prisma/client"
-import { addWeeks, format, isAfter, isBefore, isEqual } from "date-fns"
+import { format, isAfter, isBefore, isEqual } from "date-fns"
 
 export function Tournament({
   tournament,
@@ -35,6 +35,18 @@ export function Tournament({
       </p>
       <p>{`Format: ${tournament.format}`}</p>
       <p>{`${tournament.startingTime} min + ${tournament.increment} sec`}</p>
+    </div>
+  )
+}
+
+export function TournamentSkeleton() {
+  return (
+    <div className="animate-pulse space-y-2 overflow-hidden">
+      <div className="w-[22rem] h-6 rounded bg-foreground/20 mb-4" />
+      <div className="w-72 h-4 rounded bg-foreground/20" />
+      <div className="w-64 h-4 rounded bg-foreground/20" />
+      <div className="w-[17rem] h-4 rounded bg-foreground/20" />
+      <div className="w-60 h-4 rounded bg-foreground/20" />
     </div>
   )
 }

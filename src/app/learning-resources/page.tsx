@@ -9,7 +9,7 @@ import chessagain from "@/assets/img/chessagain_logo.png"
 import remoteChessAcademy from "@/assets/img/remotechessacademy-logo.png"
 
 export const metadata: Metadata = {
-  title: "Library Program",
+  title: "Learning Resources",
   description:
     "Here's some free resources to learn and improve at the game of chess.",
 }
