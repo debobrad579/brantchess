@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -12,7 +11,6 @@ import {
   DropdownMenuPortal,
   DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu"
-import brantchessLogo from "@/assets/img/brantchess-logo.png"
 import Link from "next/link"
 import { Menu, Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
@@ -20,6 +18,7 @@ import { usePathname } from "next/navigation"
 import { useMediaQuery } from "@/hooks/useMediaQuery"
 import { ComponentProps } from "react"
 import { cn } from "@/lib/utils"
+import Logo from "@/assets/img/logo.svg"
 
 export function Navbar() {
   const isDesktop = useMediaQuery("(min-width: 1100px)")
@@ -27,12 +26,7 @@ export function Navbar() {
   return (
     <nav className="flex items-center justify-between px-5 py-2 bg-navbar text-navbar-foreground sm:px-10 md:px-20 lg:px-[10vw]">
       <Link href="/">
-        <Image
-          priority
-          src={brantchessLogo}
-          alt="Brantford Chess Club Logo"
-          width="100"
-        ></Image>
+        <Logo className="w-28" />
       </Link>
       {!isDesktop ? (
         <DropdownMenu>
