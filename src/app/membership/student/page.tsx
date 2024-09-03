@@ -6,7 +6,8 @@ export default function MembershipPage() {
       <div className="text-2xl font-bold">Student Membership</div>
       <div className="text-lg">{formatCurrency(30)}</div>
       <div className="text-muted-foreground">
-        A one year membership for high school or post secondary students.
+        A one year membership for a high school or post secondary school
+        student.
       </div>
       <div className="text-muted-foreground text-sm">
         Pay in person or etransfer $30 to brantchessca@gmail.com.

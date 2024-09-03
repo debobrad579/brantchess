@@ -1,4 +1,7 @@
 import { formatCurrency } from "@/lib/formatters"
+import { addYears } from "date-fns"
+
+export const revalidate = 604800
 
 export default function MembershipPage() {
   return (
@@ -6,7 +9,8 @@ export default function MembershipPage() {
       <div className="text-2xl font-bold">Junior Membership</div>
       <div className="text-lg">{formatCurrency(30)}</div>
       <div className="text-muted-foreground">
-        A one year membership for anyone below the age of 18.
+        A one year membership for anyone whose year of birth is{" "}
+        {addYears(new Date(), -20).getFullYear()} or later.
       </div>
       <div className="text-muted-foreground text-sm">
         Pay in person or etransfer $30 to brantchessca@gmail.com.

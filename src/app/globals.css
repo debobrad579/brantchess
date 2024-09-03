@@ -83,7 +83,13 @@
   body {
     @apply bg-background text-foreground leading-6;
   }
-  main a {
+  #home-info a {
     @apply text-blue-500 hover:underline;
+  }
+  #home-info h1 {
+    @apply text-2xl font-bold;
+  }
+  #home-info h2 {
+    @apply text-xl font-bold;
   }
 }
