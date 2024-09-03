@@ -37,7 +37,11 @@ async function ClubInfoSection() {
     <div className="flex-grow-[2] basis-0 space-y-4">
       <h2 className="text-xl font-bold">
         We Are Located At{" "}
-        <a href={homeInfo?.locationUrl} target="_blank">
+        <a
+          href={homeInfo?.locationUrl}
+          target="_blank"
+          className="text-blue-500 hover:underline"
+        >
           {homeInfo?.location}
         </a>
       </h2>
