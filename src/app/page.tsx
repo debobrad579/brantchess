@@ -44,6 +44,7 @@ async function ClubInfoSection() {
       <div
         dangerouslySetInnerHTML={{ __html: homeInfo?.content }}
         className="space-y-4"
+        id="home-info"
       />
     </div>
   )

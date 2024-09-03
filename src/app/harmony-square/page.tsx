@@ -49,7 +49,11 @@ export default async function HarmonySquarePage() {
           </h2>
           {harmonySquareInfo.tournamentTitles.map((title, index) => (
             <div key={index}>
-              <a target="_blank" href={harmonySquareInfo.tournamentUrls[index]}>
+              <a
+                target="_blank"
+                href={harmonySquareInfo.tournamentUrls[index]}
+                className="text-blue-500 hover:underline"
+              >
                 {title}
               </a>
             </div>

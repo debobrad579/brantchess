@@ -27,8 +27,9 @@ export default function LearningResourcesPage() {
             ages 6 and up to learn the game, or to practice the skills that you
             already have. Come out to the Brantford public library at{" "}
             <a
-              href="http://maps.google.com/?q=173+Colborne+Street"
               target="_blank"
+              href="http://maps.google.com/?q=173+Colborne+Street"
+              className="text-blue-500 hover:underline"
             >
               173 Colborne Street
             </a>{" "}
@@ -39,6 +40,7 @@ export default function LearningResourcesPage() {
             <a
               target="_blank"
               href="https://calendar.brantfordlibrary.ca/default/Detail/2024-01-06-1000-Chess-Club"
+              className="text-blue-500 hover:underline"
             >
               Library Program Schedule
             </a>
@@ -49,6 +51,7 @@ export default function LearningResourcesPage() {
               <a
                 target="_blank"
                 href="https://www.youtube.com/watch?v=p8pZbhjL-fQ&list=PL8N8j2e7RpPnpqbISqi1SJ9_wrnNU3rEm"
+                className="text-blue-500 hover:underline"
               >
                 Building Habits by Canadian GM Aman Hambleton
               </a>
@@ -57,6 +60,7 @@ export default function LearningResourcesPage() {
               <a
                 target="_blank"
                 href="https://www.youtube.com/watch?v=XtaEnxG2lbg&list=PLBRObSmbZluSo6h0AySyeZRdlQzEhr2XL"
+                className="text-blue-500 hover:underline"
               >
                 How To Win At Chess by IM Levy Rozman
               </a>
@@ -65,12 +69,17 @@ export default function LearningResourcesPage() {
               <a
                 target="_blank"
                 href="https://www.youtube.com/watch?v=mhUoe2JBxco&list=PLT1F2nOxLHOfQI_hFiDnnWj4lb5KsviJ_"
+                className="text-blue-500 hover:underline"
               >
                 Improve your end game with GM Daniel Naroditsky
               </a>
             </li>
             <li className="list-disc">
-              <a target="_blank" href="https://www.youtube.com/@agadmator">
+              <a
+                target="_blank"
+                href="https://www.youtube.com/@agadmator"
+                className="text-blue-500 hover:underline"
+              >
                 Improve your overall game with Agamator
               </a>
             </li>
