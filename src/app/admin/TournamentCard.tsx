@@ -46,6 +46,7 @@ const formSchema = z.object({
     startingTime: z.coerce.number().int().gt(0),
     increment: z.coerce.number().int(),
   }),
+  flyerURL: z.string(),
 })
 
 export function TournamentCard({ tournaments }: { tournaments: Tournament[] }) {
@@ -63,7 +64,7 @@ export function TournamentCard({ tournaments }: { tournaments: Tournament[] }) {
         />
       ) : (
         <ScrollArea className="overflow-auto">
-          <CardContent className="p-3 h-[416px] sm:h-[368px]">
+          <CardContent className="p-3 h-[460px] sm:h-[416px]">
             <div className="flex flex-col gap-2">
               {tournaments.map((tournament) => (
                 <Button
@@ -123,6 +124,7 @@ function TournamentForm({
         startingTime: tournament?.startingTime ?? 15,
         increment: tournament?.increment ?? 10,
       },
+      flyerURL: tournament?.flyerURL ?? "",
     },
   })
   const isLarge = useMediaQuery("(min-width: 400px)")
@@ -143,6 +145,7 @@ function TournamentForm({
               format: data.format,
               startingTime: data.timeControl.startingTime,
               increment: data.timeControl.increment,
+              flyerURL: data.flyerURL,
             }
             if (tournament == null) {
               await addTournamentAction(newData)
@@ -267,9 +270,26 @@ function TournamentForm({
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="flyerURL"
+            render={({ field }) => (
+              <FormItem>
+                <div className="flex gap-2 items-center">
+                  <FormLabel className="w-24 min-w-24">Flyer URL:</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                </div>
+              </FormItem>
+            )}
+          />
         </CardContent>
         <CardFooter className="flex flex-col sm:flex-row gap-2 p-3">
-          <Button className="flex-1" disabled={isSubmitting || isDeleting}>
+          <Button
+            className="flex-1 w-full"
+            disabled={isSubmitting || isDeleting}
+          >
             {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {tournament
               ? isSubmitting
@@ -279,23 +299,22 @@ function TournamentForm({
               ? "Adding"
               : "Add"}
           </Button>
-          <div className="flex gap-2">
+          <div className="flex w-full sm:w-auto gap-2">
             <Button
               variant="secondary"
               type="button"
               onClick={closeForm}
               disabled={isSubmitting || isDeleting}
-              className="flex-1"
+              className="w-full"
             >
               Discard
             </Button>
             {tournament && (
               <Dialog>
-                <DialogTrigger className="flex-1" asChild>
+                <DialogTrigger asChild>
                   <Button
                     variant="destructive"
                     disabled={isSubmitting || isDeleting}
-                    className="w-full"
                     type="button"
                   >
                     Delete

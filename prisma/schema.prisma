@@ -18,6 +18,7 @@ model Tournament {
   format            String
   startingTime      Int
   increment         Int
+  flyerURL          String?
 }
 
 model Champion {

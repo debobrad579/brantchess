@@ -1,4 +1,4 @@
-import { Tournament } from "@prisma/client"
+import type { Tournament } from "@prisma/client"
 import { format, isAfter, isBefore, isEqual } from "date-fns"
 
 export function Tournament({
@@ -35,6 +35,15 @@ export function Tournament({
       </p>
       <p>{`Format: ${tournament.format}`}</p>
       <p>{`${tournament.startingTime} min + ${tournament.increment} sec`}</p>
+      {tournament.flyerURL && (
+        <a
+          className="text-blue-500 hover:underline"
+          href={tournament.flyerURL}
+          target="_blank"
+        >
+          Flyer
+        </a>
+      )}
     </div>
   )
 }
