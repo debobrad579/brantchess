@@ -35,7 +35,7 @@ export function Tournament({
       </p>
       <p>{`Format: ${tournament.format}`}</p>
       <p>{`${tournament.startingTime} min + ${tournament.increment} sec`}</p>
-      {tournament.flyerURL != null && (
+      {tournament.flyerURL && (
         <a
           className="text-blue-500 hover:underline"
           href={tournament.flyerURL}
