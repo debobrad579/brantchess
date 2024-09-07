@@ -6,13 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "@/components/ui/form"
+import { Form, FormControl } from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
 import { getYear } from "date-fns"
 import type { Champion } from "@prisma/client"
@@ -31,6 +25,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { AdminFormField } from "@/components/page/AdminFormField"
 
 const formSchema = z.object({
   name: z.object({
@@ -120,115 +115,110 @@ export function ChampionsCard({ champions }: { champions: Champion[] }) {
             })}
             className="space-y-2"
           >
-            <FormField
+            <AdminFormField
               control={form.control}
               name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <div className="flex gap-2 items-center">
-                    <FormLabel className="w-24 min-w-24">Name:</FormLabel>
-                    <FormControl>
-                      <Input
-                        className="w-8"
-                        value={field.value?.firstInitial}
-                        onChange={(e) =>
-                          field.onChange({
-                            ...field.value,
-                            firstInitial: e.target.value,
-                          })
-                        }
-                        name="firstInitial"
-                        autoComplete="off"
-                      />
-                    </FormControl>
+              label="Name:"
+              render={(field) => (
+                <>
+                  <FormControl>
                     <Input
-                      value={field.value?.lastName}
+                      className="w-8"
+                      value={field.value?.firstInitial}
                       onChange={(e) =>
                         field.onChange({
                           ...field.value,
-                          lastName: e.target.value,
+                          firstInitial: e.target.value,
                         })
                       }
-                      name="lastName"
+                      name="firstInitial"
                       autoComplete="off"
                     />
-                    {champions.find(
-                      (champion) =>
-                        champion.firstInitial === field.value.firstInitial &&
-                        champion.lastName === field.value.lastName
-                    ) && (
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <Button
-                            variant="destructive"
-                            type="button"
-                            disabled={isAdding || isDeleting}
-                          >
-                            Delete
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent>
-                          <DialogHeader>
-                            <DialogTitle>
-                              Are you sure you want to delete this champion?
-                            </DialogTitle>
-                          </DialogHeader>
-                          <Button
-                            disabled={isDeleting}
-                            variant="destructive"
-                            type="button"
-                            onClick={() =>
-                              startDeletingTransition(async () => {
-                                await deleteChampionAction(
-                                  field.value.firstInitial,
-                                  field.value.lastName
-                                )
-                              })
-                            }
-                          >
-                            {isDeleting && (
-                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            )}
-                            {isDeleting ? "Deleteing" : "Delete"}
-                          </Button>
-                        </DialogContent>
-                      </Dialog>
-                    )}
-                  </div>
-                </FormItem>
+                  </FormControl>
+                  <Input
+                    value={field.value?.lastName}
+                    onChange={(e) =>
+                      field.onChange({
+                        ...field.value,
+                        lastName: e.target.value,
+                      })
+                    }
+                    name="lastName"
+                    autoComplete="off"
+                  />
+                  {champions.find(
+                    (champion) =>
+                      champion.firstInitial === field.value.firstInitial &&
+                      champion.lastName === field.value.lastName
+                  ) && (
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button
+                          variant="destructive"
+                          type="button"
+                          disabled={isAdding || isDeleting}
+                        >
+                          Delete
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>
+                            Are you sure you want to delete this champion?
+                          </DialogTitle>
+                        </DialogHeader>
+                        <Button
+                          disabled={isDeleting}
+                          variant="destructive"
+                          type="button"
+                          onClick={() =>
+                            startDeletingTransition(async () => {
+                              await deleteChampionAction(
+                                field.value.firstInitial,
+                                field.value.lastName
+                              )
+                            })
+                          }
+                        >
+                          {isDeleting && (
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          )}
+                          {isDeleting ? "Deleteing" : "Delete"}
+                        </Button>
+                      </DialogContent>
+                    </Dialog>
+                  )}
+                </>
               )}
             />
-            <FormField
+            <AdminFormField
               control={form.control}
               name="year"
-              render={({ field }) => (
-                <FormItem>
-                  <div className="flex gap-2 items-center">
-                    <FormLabel className="w-24 min-w-24">Year:</FormLabel>
-                    <FormControl>
-                      <Input {...field} autoComplete="off" />
-                    </FormControl>
-                    <Button disabled={isDeleting || isAdding}>
-                      {isAdding && (
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      )}
-                      {champions.find(
-                        (champion) =>
-                          champion.firstInitial ===
-                            form.getValues().name.firstInitial &&
-                          champion.lastName ===
-                            form.getValues().name.lastName &&
-                          champion.years.includes(Number(field.value))
-                      )
-                        ? isAdding
-                          ? "Removing"
-                          : "Remove"
-                        : isAdding
-                        ? "Adding"
-                        : "Add"}
-                    </Button>
-                  </div>
-                </FormItem>
+              label="Year:"
+              render={(field) => (
+                <>
+                  <FormControl>
+                    <Input {...field} autoComplete="off" />
+                  </FormControl>
+                  <Button disabled={isDeleting || isAdding}>
+                    {isAdding && (
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    )}
+                    {champions.find(
+                      (champion) =>
+                        champion.firstInitial ===
+                          form.getValues().name.firstInitial &&
+                        champion.lastName === form.getValues().name.lastName &&
+                        champion.years.includes(Number(field.value))
+                    )
+                      ? isAdding
+                        ? "Removing"
+                        : "Remove"
+                      : isAdding
+                      ? "Adding"
+                      : "Add"}
+                  </Button>
+                </>
               )}
             />
           </form>
