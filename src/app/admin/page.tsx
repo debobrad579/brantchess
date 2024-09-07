@@ -1,5 +1,5 @@
 import { getTournaments } from "@/db/tournaments"
-import { ClubInfoCard } from "./ClubInfoCard"
+import { ClubInfoCard } from "./HomeInfoCard"
 import { HarmonySquareInfoCard } from "./HarmonySquareInfoCard"
 import { TournamentCard } from "./TournamentCard"
 import { ChampionsCard } from "./ChampionsCard"

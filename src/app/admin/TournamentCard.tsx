@@ -8,16 +8,10 @@ import { Input } from "@/components/ui/input"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "@/components/ui/form"
+import { Form, FormControl } from "@/components/ui/form"
 import { useMediaQuery } from "@/hooks/useMediaQuery"
 import { Separator } from "@/components/ui/separator"
-import { FormDateRangePicker } from "@/components/forms/FormDateRangePicker"
+import { FormDateRangePicker } from "@/components/ui/form-date-range-picker"
 import {
   addTournamentAction,
   deleteTournamentAction,
@@ -32,6 +26,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { AdminFormField } from "@/components/page/AdminFormField"
 
 const formSchema = z.object({
   title: z.string().min(1),
@@ -158,131 +153,72 @@ function TournamentForm({
         })}
       >
         <CardContent className="space-y-2 p-3">
-          <FormField
-            control={form.control}
-            name="title"
-            render={({ field }) => (
-              <FormItem>
-                <div className="flex gap-2 items-center">
-                  <FormLabel className="w-24 min-w-24">Title:</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                </div>
-              </FormItem>
-            )}
-          />
-          <FormField
+          <AdminFormField control={form.control} name="title" label="Title:" />
+          <AdminFormField
             control={form.control}
             name="subtitle"
-            render={({ field }) => (
-              <FormItem>
-                <div className="flex gap-2 items-center">
-                  <FormLabel className="w-24 min-w-24">Subtitle:</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                </div>
-              </FormItem>
-            )}
+            label="Subtitle:"
           />
-          <FormField
+          <AdminFormField
             control={form.control}
             name="defendingChampion"
-            render={({ field }) => (
-              <FormItem>
-                <div className="flex gap-2 items-center">
-                  <FormLabel className="w-24 min-w-24">Defending:</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                </div>
-              </FormItem>
-            )}
+            label="Defending:"
           />
-          <FormField
+          <AdminFormField
             control={form.control}
             name="date"
-            render={({ field }) => (
-              <FormItem>
-                <div className="flex gap-2 items-center">
-                  <FormLabel className="w-24 min-w-24">Date:</FormLabel>
-                  <FormDateRangePicker
-                    date={field.value}
-                    onSelect={field.onChange}
-                  />
-                </div>
-              </FormItem>
+            label="Date:"
+            render={(field) => (
+              <FormDateRangePicker
+                date={field.value}
+                onSelect={field.onChange}
+              />
             )}
           />
-          <FormField
+          <AdminFormField
             control={form.control}
             name="format"
-            render={({ field }) => (
-              <FormItem>
-                <div className="flex gap-2 items-center">
-                  <FormLabel className="w-24 min-w-24">Format:</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                </div>
-              </FormItem>
-            )}
+            label="Format:"
           />
-          <FormField
+          <AdminFormField
             control={form.control}
             name="timeControl"
-            render={({ field }) => (
-              <FormItem>
-                <div className="flex gap-2 items-center">
-                  <FormLabel className="w-24 min-w-24">Time Control:</FormLabel>
-                  <div className="flex gap-2 items-center w-full">
-                    <FormControl>
-                      <Input
-                        value={field.value?.startingTime}
-                        onChange={(e) =>
-                          field.onChange({
-                            ...field.value,
-                            startingTime: e.target.value,
-                          })
-                        }
-                        name="startingValue"
-                      />
-                    </FormControl>
-                    <span className="whitespace-nowrap text-muted-foreground">
-                      {isLarge ? "min +" : "+"}
-                    </span>
-                    <Input
-                      value={field.value?.increment}
-                      onChange={(e) =>
-                        field.onChange({
-                          ...field.value,
-                          increment: e.target.value,
-                        })
-                      }
-                      name="increment"
-                    />
-                    {isLarge && (
-                      <span className="text-muted-foreground">sec</span>
-                    )}
-                  </div>
-                </div>
-              </FormItem>
+            label="Time Control:"
+            render={(field) => (
+              <div className="flex gap-2 items-center w-full">
+                <FormControl>
+                  <Input
+                    value={field.value?.startingTime}
+                    onChange={(e) =>
+                      field.onChange({
+                        ...field.value,
+                        startingTime: e.target.value,
+                      })
+                    }
+                    name="startingValue"
+                  />
+                </FormControl>
+                <span className="whitespace-nowrap text-muted-foreground">
+                  {isLarge ? "min +" : "+"}
+                </span>
+                <Input
+                  value={field.value?.increment}
+                  onChange={(e) =>
+                    field.onChange({
+                      ...field.value,
+                      increment: e.target.value,
+                    })
+                  }
+                  name="increment"
+                />
+                {isLarge && <span className="text-muted-foreground">sec</span>}
+              </div>
             )}
           />
-          <FormField
+          <AdminFormField
             control={form.control}
             name="flyerURL"
-            render={({ field }) => (
-              <FormItem>
-                <div className="flex gap-2 items-center">
-                  <FormLabel className="w-24 min-w-24">Flyer URL:</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                </div>
-              </FormItem>
-            )}
+            label="Flyer URL:"
           />
         </CardContent>
         <CardFooter className="flex flex-col sm:flex-row gap-2 p-3">

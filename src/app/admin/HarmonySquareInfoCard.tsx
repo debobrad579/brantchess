@@ -1,6 +1,6 @@
 "use client"
 
-import { FormDateRangePicker } from "@/components/forms/FormDateRangePicker"
+import { FormDateRangePicker } from "@/components/ui/form-date-range-picker"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import {
@@ -20,6 +20,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { updateHarmonySquarePageAction } from "./actions"
 import type { HarmonySquareInformation } from "@prisma/client"
+import { AdminFormField } from "@/components/page/AdminFormField"
 
 const formSchema = z.object({
   date: z.object({
@@ -75,23 +76,19 @@ export function HarmonySquareInfoCard({
           })}
         >
           <CardContent className="space-y-2 p-3">
-            <FormField
+            <AdminFormField
               control={form.control}
               name="date"
-              render={({ field }) => (
-                <FormItem>
-                  <div className="flex gap-2 items-center">
-                    <FormLabel className="w-24 min-w-24">Date:</FormLabel>
-                    <FormDateRangePicker
-                      date={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) =>
-                        (!isTuesday(date) && !isThursday(date)) ||
-                        (getMonth(date) !== 6 && getMonth(date) !== 7)
-                      }
-                    />
-                  </div>
-                </FormItem>
+              label="Date:"
+              render={(field) => (
+                <FormDateRangePicker
+                  date={field.value}
+                  onSelect={field.onChange}
+                  disabled={(date) =>
+                    (!isTuesday(date) && !isThursday(date)) ||
+                    (getMonth(date) !== 6 && getMonth(date) !== 7)
+                  }
+                />
               )}
             />
             <Separator />

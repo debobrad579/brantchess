@@ -9,7 +9,6 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader2 } from "lucide-react"
@@ -19,6 +18,7 @@ import { z } from "zod"
 import { updateHomePageAction } from "./actions"
 import { HomeInformation } from "@prisma/client"
 import { AutosizeTextarea } from "@/components/ui/autoresize-textarea"
+import { AdminFormField } from "@/components/page/AdminFormField"
 
 const formSchema = z.object({
   location: z.string().min(1),
@@ -53,42 +53,22 @@ export function ClubInfoCard({ homeInfo }: { homeInfo: HomeInformation }) {
           })}
         >
           <CardContent className="space-y-2 p-3">
-            <FormField
+            <AdminFormField
               control={form.control}
               name="location"
-              render={({ field }) => (
-                <FormItem>
-                  <div className="flex gap-2 items-center">
-                    <FormLabel className="w-24 min-w-24">Location:</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                  </div>
-                </FormItem>
-              )}
+              label="Location:"
             />
-            <FormField
+            <AdminFormField
               control={form.control}
               name="locationUrl"
-              render={({ field }) => (
-                <FormItem>
-                  <div className="flex gap-2 items-center">
-                    <FormLabel className="w-24 min-w-24">
-                      Location URL:
-                    </FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                  </div>
-                </FormItem>
-              )}
+              label="Location URL:"
             />
             <FormField
               control={form.control}
               name="content"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Home Content</FormLabel>
+                  <FormLabel>Home Content:</FormLabel>
                   <FormControl>
                     <AutosizeTextarea className="resize-none" {...field} />
                   </FormControl>
