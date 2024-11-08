@@ -5,7 +5,7 @@ import { Champion, PrismaPromise } from "@prisma/client"
 export const getOrderedChampions = unstable_cache(
   function (): PrismaPromise<(Champion & { total: number })[]> {
     return prisma.$queryRaw`
-      SELECT *, ARRAY_LENGTH("years", 1) AS "total" FROM "public"."Champion" 
+      SELECT *, ARRAY_LENGTH("years", 1) AS "total" FROM "brantchess"."Champion" 
       ORDER BY "total" DESC, (SELECT AVG("value") FROM UNNEST("years") AS "value") DESC;
     `
   },
@@ -61,7 +61,7 @@ export function removeYearFromChampion({
   year,
 }: Omit<Champion, "years"> & { year: number }): PrismaPromise<Champion> {
   return prisma.$queryRaw`
-    UPDATE "public"."Champion"
+    UPDATE "brantchess"."Champion"
     SET "years" = array_remove("years", ${year})
     WHERE "firstInitial" = ${firstInitial} AND "lastName" = ${lastName};
   `
