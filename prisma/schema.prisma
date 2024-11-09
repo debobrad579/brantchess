@@ -43,3 +43,25 @@ model HarmonySquareInformation {
   tournamentTitles String[]
   tournamentUrls   String[]
 }
+
+model OntarioOpenPlayer {
+  id          Int     @id @default(autoincrement())
+  CFCId       Int
+  rating      Int
+  age         Int
+  isFemale    Boolean @default(false)
+  isPlayingUp Boolean @default(false)
+  result1     Result  @default(NOT_PLAYED)
+  result2     Result  @default(NOT_PLAYED)
+  result3     Result  @default(NOT_PLAYED)
+  result4     Result  @default(NOT_PLAYED)
+  result5     Result  @default(NOT_PLAYED)
+  result6     Result  @default(NOT_PLAYED)
+}
+
+enum Result {
+  WIN
+  LOSS
+  DRAW
+  NOT_PLAYED
+}
