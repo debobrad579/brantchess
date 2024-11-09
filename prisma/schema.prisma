@@ -1,13 +1,11 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["multiSchema"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider  = "postgresql"
   url       = env("POSTGRES_PRISMA_URL")
   directUrl = env("POSTGRES_URL_NON_POOLING")
-  schemas   = ["brantchess"]
 }
 
 model Tournament {
@@ -21,8 +19,6 @@ model Tournament {
   startingTime      Int
   increment         Int
   flyerURL          String?
-
-  @@schema("brantchess")
 }
 
 model Champion {
@@ -31,7 +27,6 @@ model Champion {
   years        Int[]
 
   @@unique([firstInitial, lastName])
-  @@schema("brantchess")
 }
 
 model HomeInformation {
@@ -39,8 +34,6 @@ model HomeInformation {
   location    String
   locationUrl String
   content     String
-
-  @@schema("brantchess")
 }
 
 model HarmonySquareInformation {
@@ -49,6 +42,26 @@ model HarmonySquareInformation {
   endDate          DateTime
   tournamentTitles String[]
   tournamentUrls   String[]
+}
 
-  @@schema("brantchess")
+model OntarioOpenPlayer {
+  id          Int     @id @default(autoincrement())
+  CFCId       Int
+  rating      Int
+  age         Int
+  isFemale    Boolean @default(false)
+  isPlayingUp Boolean @default(false)
+  result1     Result  @default(NOT_PLAYED)
+  result2     Result  @default(NOT_PLAYED)
+  result3     Result  @default(NOT_PLAYED)
+  result4     Result  @default(NOT_PLAYED)
+  result5     Result  @default(NOT_PLAYED)
+  result6     Result  @default(NOT_PLAYED)
+}
+
+enum Result {
+  WIN
+  LOSS
+  DRAW
+  NOT_PLAYED
 }
