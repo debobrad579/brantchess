@@ -14,15 +14,43 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import Image from "next/image"
-
-import JV from "@/assets/img/JV.jpg"
-import PN from "@/assets/img/PN.jpg"
-import RG from "@/assets/img/RG.jpg"
-import LH from "@/assets/img/LH.jpg"
 import { robotoMono } from "@/assets/fonts"
 import type { Metadata } from "next"
 import { getOrderedChampions } from "@/db/champions"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import andrew from "@/assets/img/trophy/Andrew David C Champion 2024.jpg"
+import brady from "@/assets/img/trophy/Brady DeBoer 2024 Active Champion.jpg"
+import clifford1 from "@/assets/img/trophy/Clifford Flair Club Champion 2024.jpg"
+import clifford2 from "@/assets/img/trophy/Clifford Flair Leo McMahon Champion 2024.jpg"
+import gabriel from "@/assets/img/trophy/Gabriel Momnbach B Champion 2024.jpg"
+import paulo from "@/assets/img/trophy/Paulo Nunes Blitz Champion 2023.jpg"
+
+const images = [
+  {
+    src: clifford1,
+    title: "Clifford Flair Club Champion 2024",
+  },
+  {
+    src: gabriel,
+    title: "Gabriel Momnbach B Champion 2024",
+  },
+  {
+    src: andrew,
+    title: "Andrew David C Champion 2024",
+  },
+  {
+    src: clifford2,
+    title: "Clifford Flair Leo McMahon Champion 2024",
+  },
+  {
+    src: brady,
+    title: "Brady DeBoer Active Champion 2024",
+  },
+  {
+    src: paulo,
+    title: "Paulo Nunes Blitz Champion 2023",
+  },
+]
 
 export const metadata: Metadata = {
   title: "Champions",
@@ -36,7 +64,7 @@ export default async function ChampionsPage() {
     <>
       <h1 className="text-2xl font-bold">CLUB CHAMPIONS</h1>
       <div className="flex flex-col gap-8 lg:flex-row">
-        <div className="flex-grow-[2] basis-0">
+        <div className="flex-grow-[1.5] basis-0">
           <ScrollArea className="overflow-auto">
             <div className="h-[45vh]">
               <Table className={robotoMono.className}>
@@ -72,22 +100,20 @@ export default async function ChampionsPage() {
         </div>
         <div className="flex flex-col items-center gap-2 flex-1">
           <h2 className="text-xl font-bold text-center">
-            2018 Trophy Presentations
+            2025 Trophy Presentations
           </h2>
           <Carousel className="w-3/4 max-w-sm ring-1 ring-ring">
             <CarouselContent>
-              <CarouselItem>
-                <Image src={JV} alt="JV" />
-              </CarouselItem>
-              <CarouselItem>
-                <Image src={PN} alt="PN" />
-              </CarouselItem>
-              <CarouselItem>
-                <Image src={RG} alt="RG" />
-              </CarouselItem>
-              <CarouselItem>
-                <Image src={LH} alt="LH" />
-              </CarouselItem>
+              {images.map((image, index) => (
+                <CarouselItem key={image.src.src}>
+                  <Image
+                    src={image.src}
+                    alt={image.title}
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 27vw"
+                    priority={index === 0}
+                  />
+                </CarouselItem>
+              ))}
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />
