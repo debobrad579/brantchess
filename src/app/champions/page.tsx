@@ -109,7 +109,7 @@ export default async function ChampionsPage() {
                   <Image
                     src={image.src}
                     alt={image.title}
-                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 27vw"
                     priority={index === 0}
                   />
                 </CarouselItem>
