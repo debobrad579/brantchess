@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils"
 import Logo from "@/assets/img/logo.svg"
 
 export function Navbar() {
-  const isDesktop = useMediaQuery("(min-width: 1100px)")
+  const isDesktop = useMediaQuery("(min-width: 1200px)")
 
   return (
     <nav className="flex items-center justify-between px-5 py-2 bg-navbar text-navbar-foreground sm:px-10 md:px-20 lg:px-[10vw]">
