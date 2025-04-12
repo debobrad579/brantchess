@@ -28,27 +28,27 @@ import paulo from "@/assets/img/trophy/Paulo Nunes Blitz Champion 2023.jpg"
 const images = [
   {
     src: clifford1,
-    title: "Clifford Flair Club Champion 2024",
+    title: "Clifford Flair - Club Champion 2024",
   },
   {
     src: gabriel,
-    title: "Gabriel Momnbach B Champion 2024",
+    title: "Gabriel Momnbach - B Champion 2024",
   },
   {
     src: andrew,
-    title: "Andrew David C Champion 2024",
+    title: "Andrew David - C Champion 2024",
   },
   {
     src: clifford2,
-    title: "Clifford Flair Leo McMahon Champion 2024",
+    title: "Clifford Flair - Leo McMahon Champion 2024",
   },
   {
     src: brady,
-    title: "Brady DeBoer Active Champion 2024",
+    title: "Brady DeBoer - Active Champion 2024",
   },
   {
     src: paulo,
-    title: "Paulo Nunes Blitz Champion 2023",
+    title: "Paulo Nunes - Blitz Champion 2023",
   },
 ]
 
@@ -64,45 +64,41 @@ export default async function ChampionsPage() {
     <>
       <h1 className="text-2xl font-bold">CLUB CHAMPIONS</h1>
       <div className="flex flex-col gap-8 lg:flex-row">
-        <div className="flex-grow-[1.5] basis-0">
-          <ScrollArea className="overflow-auto">
-            <div className="h-[45vh]">
-              <Table className={robotoMono.className}>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-[100px]">Name</TableHead>
-                    <TableHead />
-                    <TableHead>
-                      Year(s) of Championship (Starting in 1954)
-                    </TableHead>
-                    <TableHead className="text-right">Total</TableHead>
+        <div className="flex-1 basis-0">
+          <ScrollArea className="overflow-auto lg:aspect-[5/3] w-full">
+            <Table className={robotoMono.className}>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-[100px]">Name</TableHead>
+                  <TableHead />
+                  <TableHead>Year(s) of Championship</TableHead>
+                  <TableHead className="text-right">Total</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {champions.map((champion) => (
+                  <TableRow
+                    key={`${champion.firstInitial}-${champion.lastName}`}
+                  >
+                    <TableCell className="font-medium">
+                      {champion.firstInitial}.
+                    </TableCell>
+                    <TableCell>{champion.lastName}:</TableCell>
+                    <TableCell>{formatYears(champion.years)}</TableCell>
+                    <TableCell className="text-right">
+                      {champion.total}
+                    </TableCell>
                   </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {champions.map((champion) => (
-                    <TableRow
-                      key={`${champion.firstInitial}-${champion.lastName}`}
-                    >
-                      <TableCell className="font-medium">
-                        {champion.firstInitial}.
-                      </TableCell>
-                      <TableCell>{champion.lastName}:</TableCell>
-                      <TableCell>{formatYears(champion.years)}</TableCell>
-                      <TableCell className="text-right">
-                        {champion.total}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
+                ))}
+              </TableBody>
+            </Table>
           </ScrollArea>
         </div>
         <div className="flex flex-col items-center gap-2 flex-1">
           <h2 className="text-xl font-bold text-center">
             2025 Trophy Presentations
           </h2>
-          <Carousel className="w-3/4 max-w-sm ring-1 ring-ring">
+          <Carousel className="w-3/4 max-w-sm">
             <CarouselContent>
               {images.map((image, index) => (
                 <CarouselItem key={image.src.src}>
@@ -111,7 +107,9 @@ export default async function ChampionsPage() {
                     alt={image.title}
                     sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 27vw"
                     priority={index === 0}
+                    className="border border-ring"
                   />
+                  <div className="text-center mt-2">{image.title}</div>
                 </CarouselItem>
               ))}
             </CarouselContent>
