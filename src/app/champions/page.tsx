@@ -32,7 +32,7 @@ const images = [
   },
   {
     src: gabriel,
-    title: "Gabriel Momnbach - B Champion 2024",
+    title: "Gabriel Mombach - B Champion 2024",
   },
   {
     src: andrew,
