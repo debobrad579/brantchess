@@ -39,7 +39,7 @@ export default function LearningResourcesPage() {
           <div>
             <a
               target="_blank"
-              href="https://calendar.brantfordlibrary.ca/default/Detail/2024-01-06-1000-Chess-Club"
+              href="https://calendar.brantfordlibrary.ca/default/Detail/2025-09-13-1000-Chess-Club"
               className="text-blue-500 hover:underline"
             >
               Library Program Schedule
