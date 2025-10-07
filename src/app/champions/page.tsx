@@ -17,7 +17,7 @@ import Image from "next/image"
 import { robotoMono } from "@/assets/fonts"
 import type { Metadata } from "next"
 import { getOrderedChampions } from "@/db/champions"
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import andrew from "@/assets/img/trophy/Andrew David C Champion 2024.jpg"
 import brady from "@/assets/img/trophy/Brady DeBoer 2024 Active Champion.jpg"
 import clifford1 from "@/assets/img/trophy/Clifford Flair Club Champion 2024.jpg"
@@ -64,8 +64,8 @@ export default async function ChampionsPage() {
     <>
       <h1 className="text-2xl font-bold">CLUB CHAMPIONS</h1>
       <div className="grid gap-8 min-[1148px]:grid-cols-2">
-        <div>
-          <ScrollArea className="overflow-auto min-[1148px]:aspect-[5/3] w-full">
+        <div className="overflow-x-hidden">
+          <ScrollArea className="w-full overflow-x-auto overflow-y-hidden min-[1148px]:aspect-[5/3]">
             <Table className={robotoMono.className}>
               <TableHeader>
                 <TableRow className="relative">
@@ -92,13 +92,14 @@ export default async function ChampionsPage() {
                 ))}
               </TableBody>
             </Table>
+            <ScrollBar orientation="horizontal" />
           </ScrollArea>
         </div>
         <div className="flex flex-col items-center gap-2">
           <h2 className="text-xl font-bold text-center">
             2025 Trophy Presentations
           </h2>
-          <Carousel className="w-[calc(80%-96px)]">
+          <Carousel className="w-[calc(100%-96px)]">
             <CarouselContent>
               {images.map((image, index) => (
                 <CarouselItem key={image.src.src}>
@@ -109,7 +110,9 @@ export default async function ChampionsPage() {
                     priority={index === 0}
                     className="border border-ring"
                   />
-                  <div className="text-center mt-2">{image.title}</div>
+                  <div className="text-center pt-2 hidden sm:block">
+                    {image.title}
+                  </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
