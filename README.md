@@ -4,7 +4,7 @@ Official website for the Brantford Chess Club, celebrating over 100 years of che
 
 ## 🌐 Live Site
 
-Visit [www.brantchess.ca](https://www.brantchess.ca)
+Visit [brantchess.ca](https://www.brantchess.ca)
 
 ## About
 
