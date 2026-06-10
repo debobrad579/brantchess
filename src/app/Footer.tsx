@@ -14,10 +14,10 @@ export function Footer() {
             <p>
               Email:{" "}
               <a
-                href="mailto:brantchessca@gmail.com"
+                href="mailto:rob@brantchess.ca"
                 className="hover:underline"
               >
-                brantchessca@gmail.com
+                rob@brantchess.ca
               </a>
             </p>
             <p>
@@ -34,10 +34,10 @@ export function Footer() {
             <p>
               Email:{" "}
               <a
-                href="mailto:brantchessca@gmail.com"
+                href="mailto:lee@brantchess.ca"
                 className="hover:underline"
               >
-                brantchessca@gmail.com
+                lee@brantchess.ca
               </a>
             </p>
             <p>
