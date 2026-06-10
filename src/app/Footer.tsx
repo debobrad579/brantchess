@@ -34,7 +34,7 @@ export function Footer() {
             </p>
           </div>
           <div>
-            <h3 class="font-bold">
+            <h3 className="font-bold">
               Brady DeBoer - Web Developer & Designer
             </h3>
             <a href="mailto:brady@brantchess.ca" className="hover:underline">
