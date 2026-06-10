@@ -35,6 +35,8 @@ export default async function HarmonySquarePage() {
             Tuesday and Thursday 12 pm - 2 pm
           </p>
           <p>
+            <b className="font-bold">Free to play!</b>
+            <br />
             Come out and enjoy a friendly game of chess with a representative of
             the Brantford Chess Club or other like-minded individuals.
             <br />
@@ -43,6 +45,7 @@ export default async function HarmonySquarePage() {
             <br />
             Are you the competitive type? We also host tournaments at the Square
             so you can prove you're the Champion!
+            <br />
           </p>
           <h2 className="text-xl font-bold">
             Harmony Square Chess Tournaments for {year}
