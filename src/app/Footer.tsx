@@ -11,41 +11,35 @@ export function Footer() {
             <h3 className="font-bold">
               Rob Gashgarian - President & Treasurer
             </h3>
-            <p>
-              Email:{" "}
-              <a
-                href="mailto:rob@brantchess.ca"
-                className="hover:underline"
-              >
+            <p className="flex items-center gap-1">
+              <a href="mailto:rob@brantchess.ca" className="hover:underline">
                 rob@brantchess.ca
               </a>
-            </p>
-            <p>
-              Phone:{" "}
+              <span>|</span>
               <a href="tel:5197328909" className="hover:underline">
                 (519) 732-8909
               </a>
             </p>
           </div>
           <div>
-            <h3 className="font-bold">
-              Lee Hendon - Tournament & Website Director
-            </h3>
-            <p>
-              Email:{" "}
-              <a
-                href="mailto:lee@brantchess.ca"
-                className="hover:underline"
-              >
+            <h3 className="font-bold">Lee Hendon - Tournament Director</h3>
+            <p className="flex items-center gap-1">
+              <a href="mailto:lee@brantchess.ca" className="hover:underline">
                 lee@brantchess.ca
               </a>
-            </p>
-            <p>
-              Phone:{" "}
+              <span>|</span>
               <a href="tel:5197718848" className="hover:underline">
                 (519) 771-8848
               </a>
             </p>
+          </div>
+          <div>
+            <h3 class="font-bold">
+              Brady DeBoer - Web Developer & Designer
+            </h3>
+            <a href="mailto:brady@brantchess.ca" className="hover:underline">
+              brady@brantchess.ca
+            </a>
           </div>
         </div>
       </div>
